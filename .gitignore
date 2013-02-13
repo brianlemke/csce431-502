@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore swap files
+*.swp
+
+# Ignore OS X metadata files
+.DS_Store
