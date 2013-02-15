@@ -13,5 +13,10 @@ directory. JavaScript, CSS, and images should be located in app/assets.
 Controllers, models, and views are each located in their own folder within app.
 Static pages are served from public (should generally be avoided).
 
-This README will be updated with details about managing the database once the
-database has been set up.
+The database may be administered using rake db: commands. See rake -T for
+details. The important thing is to run rake db:reset when the database may have
+changed, and rake db:test:prepare after any reset.
+
+Tests, both unit and integration, may be run using the RSpec utility (included
+in the Gemfile). All tests are located within the spec directory. All
+contributors should ensure that all tests are green before pushing to origin.
