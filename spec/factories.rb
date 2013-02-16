@@ -4,4 +4,12 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
   end
+
+  factory :organization do
+    email "organization@example.com"
+    password "foobar"
+    password_confirmation "foobar"
+    name "Test Organization"
+    description "This is a fake organization"
+  end
 end
