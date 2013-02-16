@@ -38,7 +38,6 @@ describe "UserPages" do
 
       describe "after saving the user" do
         before { click_button submit }
-        let(:user) { User.find_by_email(sample_email) }
 
         it { should have_selector('h1', text: sample_email) }
       end

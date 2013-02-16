@@ -1,0 +1,59 @@
+require 'spec_helper'
+
+describe "OrganizationPages" do
+
+  subject { page }
+
+  describe "signup page" do 
+    before { visit new_organization_path }
+
+    it { should have_selector('input#organization_email') }
+    it { should have_selector('input#organization_name') }
+    it { should have_selector('textarea#organization_description') }
+    it { should have_selector('input#organization_password') }
+    it { should have_selector('input#organization_password_confirmation') }
+  end
+
+  describe "signup" do
+    before { visit new_organization_path }
+
+    let(:submit) { "Request account" }
+
+    describe "with invalid information" do
+      it "should not create an organization" do
+        expect { click_button submit }.not_to change(Organization, :count)
+      end
+    end
+
+    describe "with valid information" do
+      let(:sample_org) { FactoryGirl.build(:organization) }
+
+      before do
+        fill_in "Email", with: sample_org.email
+        fill_in "Name", with: sample_org.name
+        fill_in "Description", with: sample_org.description
+        fill_in "Password", with: sample_org.password
+        fill_in "Confirmation", with: sample_org.password_confirmation
+      end
+
+      it "should create an organization" do
+        expect { click_button submit}.to change(Organization, :count).by(1)
+      end
+
+      describe "after saving the organization" do
+        before { click_button submit }
+
+        it { should have_selector('h1', text: sample_org.name) }
+      end
+    end
+
+    describe "after invalid signup" do
+      let(:bad_email) { "Bad Email" }
+      before { fill_in "Email", with: bad_email }
+
+      it "should have email prefilled" do
+        find_field("Email").value.should == bad_email
+      end
+    end
+  end
+end
