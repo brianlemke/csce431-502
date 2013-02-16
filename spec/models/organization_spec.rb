@@ -82,6 +82,14 @@ describe Organization do
     it { should_not be_valid }
   end
 
+  describe "when a user has the same email address" do
+    before do
+      FactoryGirl.create(:user, email: @organization.email)
+    end
+
+    it { should_not be_valid }
+  end
+
   describe "return value of authenticate method" do
     before { @organization.save }
     let(:found_org) { Organization.find_by_email(@organization.email) }

@@ -22,4 +22,12 @@ class Organization < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, on: :create
   validates :password_confirmation, presence: true, on: :create
+
+  validate :email_absent_in_users
+
+  def email_absent_in_users
+    if User.find_by_email(email)
+      errors.add(:email, "is already taken")
+    end
+  end
 end

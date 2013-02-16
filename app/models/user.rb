@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true
   validates :password_confirmation, presence: true
+
+  validate :email_absent_in_organizations
+
+  def email_absent_in_organizations
+    if Organization.find_by_email(email)
+      errors.add(:email, "is already taken")
+    end
+  end
 end
