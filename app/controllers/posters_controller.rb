@@ -37,8 +37,6 @@ class PostersController < ApplicationController
     @poster = Poster.find(params[:id])
   end
 
-  # Save file upload 
-
   # POST /posters
   # POST /posters.json
   def create

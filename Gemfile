@@ -5,6 +5,7 @@ gem 'bootstrap-sass'
 gem 'sqlite3'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'rspec-rails'

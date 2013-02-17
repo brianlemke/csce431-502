@@ -19,3 +19,6 @@
 
 # Ignore OS X metadata files
 .DS_Store
+
+# Ignore Poster test uploads
+/public/uploads
