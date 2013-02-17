@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>File:</b>
+  <%= @poster.file %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @poster.title %>
+</p>
+
+<p>
+  <b>Verified:</b>
+  <%= @poster.verified %>
+</p>
+
+
+<%= link_to 'Edit', edit_poster_path(@poster) %> |
+<%= link_to 'Back', posters_path %>

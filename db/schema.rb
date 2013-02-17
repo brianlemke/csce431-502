@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130216032251) do
+ActiveRecord::Schema.define(:version => 20130217055941) do
 
   create_table "organizations", :force => true do |t|
     t.string   "email"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20130216032251) do
   end
 
   add_index "organizations", ["email"], :name => "index_organizations_on_email", :unique => true
+
+  create_table "posters", :force => true do |t|
+    t.string   "file"
+    t.string   "title"
+    t.boolean  "verified"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

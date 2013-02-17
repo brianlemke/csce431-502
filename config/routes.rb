@@ -1,4 +1,7 @@
 TamuBulletin::Application.routes.draw do
+  resources :posters
+
+
   resources :users
   resources :organizations
 
