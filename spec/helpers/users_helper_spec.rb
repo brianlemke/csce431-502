@@ -10,5 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe UserHelper do
+describe UsersHelper do
 end

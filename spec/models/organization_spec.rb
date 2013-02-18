@@ -9,6 +9,7 @@
 #  password_digest :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  login_token     :string(255)
 #
 
 require 'spec_helper'
@@ -25,6 +26,7 @@ describe Organization do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:login_token) }
   it { should respond_to(:authenticate) }
 
   it { should be_valid }
@@ -115,6 +117,10 @@ describe Organization do
       end
 
       it { should be_valid }
+    end
+
+    describe "login token should be created" do
+      its(:login_token) { should_not be_nil }
     end
   end
 end
