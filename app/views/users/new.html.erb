@@ -1,14 +1,18 @@
-<div class="container">
-  <%= form_for(@user) do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
+<div class="container-fluid fill">
+    <div class="row-fluid">
+      <div class="span12 pagination-centered">
+        <%= form_for(@user) do |f| %>
+          <%= f.label :email %>
+          <%= f.email_field :email %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+          <%= f.label :password %>
+          <%= f.password_field :password %>
 
-    <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation %>
-
-    <%= f.submit "Create my account" %>
-  <% end %>
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.password_field :password_confirmation %>
+          </br>
+          <%= f.submit "Create my account" %>
+        <% end %>
+      </div>
+    </div>
 </div>
