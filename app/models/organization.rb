@@ -16,6 +16,8 @@ class Organization < ActiveRecord::Base
   attr_accessible :description, :email, :name, :password, :password_confirmation
   has_secure_password
 
+  has_many :posters, dependent: :destroy
+
   before_save { |organization| organization.email.downcase! }
   before_save :create_login_token
 

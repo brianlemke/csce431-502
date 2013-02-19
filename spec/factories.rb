@@ -12,4 +12,10 @@ FactoryGirl.define do
     name "Test Organization"
     description "This is a fake organization"
   end
+
+  factory :poster do
+    file "dummy.jpg"
+    title "Test Poster"
+    organization
+  end
 end

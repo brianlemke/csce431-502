@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218212815) do
+ActiveRecord::Schema.define(:version => 20130219194402) do
 
   create_table "organizations", :force => true do |t|
     t.string   "email"
@@ -30,9 +30,12 @@ ActiveRecord::Schema.define(:version => 20130218212815) do
     t.string   "file"
     t.string   "title"
     t.boolean  "verified"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "organization_id"
   end
+
+  add_index "posters", ["organization_id"], :name => "index_posters_on_organization_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

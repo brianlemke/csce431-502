@@ -28,6 +28,7 @@ describe Organization do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:login_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:posters) }
 
   it { should be_valid }
 
@@ -121,6 +122,31 @@ describe Organization do
 
     describe "login token should be created" do
       its(:login_token) { should_not be_nil }
+    end
+  end
+
+  describe "poster associations" do
+
+    before { @organization.save }
+    let!(:first_poster) do
+      FactoryGirl.create(:poster, organization: @organization,
+                         created_at: 1.day.ago)
+    end
+
+    let!(:second_poster) do
+      FactoryGirl.create(:poster, organization: @organization,
+                         created_at: 1.hour.ago)
+    end
+
+    its(:posters) { should == [first_poster, second_poster] }
+
+    it "should destroy the associated posters" do
+      posters = @organization.posters.dup
+      @organization.destroy
+      posters.should_not be_empty
+      posters.each do |poster|
+        Poster.find_by_id(poster.id).should be_nil
+      end
     end
   end
 end
