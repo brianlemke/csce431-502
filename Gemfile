@@ -6,6 +6,7 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'carrierwave'
+gem 'font-awesome-sass-rails'
 
 group :development, :test do
   gem 'rspec-rails'

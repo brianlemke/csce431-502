@@ -1,12 +1,5 @@
-<%= form_for(@user) do |f| %>
-  <SCRIPT TYPE="text/javascript" SRC="http://jacob-petersen.com/scripts/jquery-1.9.0.min.js"> </SCRIPT>
-  <SCRIPT TYPE="text/javascript" SRC="http://jacob-petersen.com/scripts/jquery-ui-1.9.2.custom.min.js"></SCRIPT>
-  <SCRIPT TYPE="text/javascript" SRC="http://jacob-petersen.com/scripts/bootstrap/js/bootstrap.min.js"></SCRIPT>
-  <LINK TYPE="text/css" REL="stylesheet" HREF="http://jacob-petersen.com/scripts/bootstrap/css/bootstrap.min.css"> </LINK>
-  <LINK TYPE="text/css" REL="stylesheet" HREF="http://jacob-petersen.com/scripts/bootstrap/css/bootstrap-responsive.min.css"> </LINK>
-  <LINK TYPE="text/css" REL="stylesheet" HREF="http://jacob-petersen.com/scripts/jquery-ui-1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css"> </LINK>
-  <LINK TYPE="text/css" REL="stylesheet" HREF="http://jacob-petersen.com/scripts/fontAwesome/css/font-awesome.min.css"> </LINK>
-  <div class="container">
+<div class="container">
+  <%= form_for(@user) do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email %>
 
@@ -17,5 +10,5 @@
     <%= f.password_field :password_confirmation %>
 
     <%= f.submit "Create my account" %>
-  </div>
-<% end %>
+  <% end %>
+</div>
