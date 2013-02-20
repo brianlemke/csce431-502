@@ -22,3 +22,6 @@
 
 # Ignore Poster test uploads
 /public/uploads
+
+# Ignore RubyMine specifics
+.idea/*

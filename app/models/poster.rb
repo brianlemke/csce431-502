@@ -15,4 +15,5 @@ class Poster < ActiveRecord::Base
   attr_accessible :file, :title, :verified
   mount_uploader :file, PosterUploader
   belongs_to :organization
+  validates_presence_of :file, :title, :verified
 end
