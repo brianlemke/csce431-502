@@ -56,4 +56,49 @@ describe "OrganizationPages" do
       end
     end
   end
+
+  describe "edit" do
+    let(:organization) { FactoryGirl.create(:organization) }
+
+    describe "without signing in" do
+      before { visit edit_organization_path(organization) }
+      it { should have_button("Sign in") }
+    end
+
+    describe "after signing in" do
+      before do
+        sign_in organization
+        visit edit_organization_path(organization)
+      end
+
+      it { should have_field("Email") }
+      it { should have_button("Save") }
+
+      describe "with invalid information" do
+        before do
+          fill_in "Email", with: "Bad Email"
+          click_button "Save"
+        end
+
+        it { should have_field("Email") }
+        it { should have_button("Save") }
+      end
+
+      describe "with valid information" do
+        let(:new_name) { "New Organization Name" }
+
+        before do
+          fill_in "Email", with: organization.email
+          fill_in "Name", with: new_name
+          fill_in "Description", with: organization.description
+          fill_in "Password", with: organization.password
+          fill_in "Confirmation", with: organization.password_confirmation
+          click_button "Save"
+        end
+
+        it { should have_selector('h1', text: new_name) }
+        specify { organization.reload.name.should == new_name }
+      end
+    end
+  end
 end

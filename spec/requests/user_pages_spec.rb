@@ -67,6 +67,9 @@ describe "UserPages" do
         visit edit_user_path(user)
       end
 
+      it { should have_field("Email") }
+      it { should have_button("Save") }
+
       describe "with invalid information" do
         before { click_button "Save" }
 

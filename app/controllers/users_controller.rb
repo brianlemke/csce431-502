@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      flash[:sucess] = "Profile updated"
+      flash[:success] = "Profile updated"
       sign_in @user
       redirect_to @user
     else
@@ -49,6 +49,6 @@ private
 
   def correct_user
     @user = current_account
-    redirect_to root_path unless @user = User.find_by_id(params[:id])
+    redirect_to root_path unless @user == User.find_by_id(params[:id])
   end
 end
