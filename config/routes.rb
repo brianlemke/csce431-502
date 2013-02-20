@@ -1,7 +1,11 @@
 TamuBulletin::Application.routes.draw do
   resources :users
   resources :organizations
-  resources :posters
+  resources :posters do
+    collection do
+      get :mainlist
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'posters#index'

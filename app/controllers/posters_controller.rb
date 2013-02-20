@@ -7,6 +7,11 @@ class PostersController < ApplicationController
     @posters = Poster.all
   end
 
+#Eventually use this for main page and when searching
+  def mainlist
+    @posters = Poster.all
+  end
+
   def show
     @poster = Poster.find(params[:id])
   end
