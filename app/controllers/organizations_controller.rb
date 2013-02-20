@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
+      sign_in @organization
       redirect_to @organization
     else
       render 'new'
