@@ -13,9 +13,9 @@ describe "UserPages" do
   end
 
   describe "signup" do
-    before { visit new_user_path }
-
     let(:submit) { "Create my account" }
+
+    before { visit new_user_path }
 
     describe "with invalid information" do
       it "should not create a user" do
@@ -24,12 +24,12 @@ describe "UserPages" do
     end
 
     describe "with valid information" do
-      let(:sample_email) { "test@example.com" }
+      let(:user) { FactoryGirl.build(:user) }
 
       before do
-        fill_in "Email", with: sample_email
-        fill_in "Password", with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        fill_in "Confirmation", with: user.password_confirmation
       end
 
       it "should create a user" do
@@ -39,7 +39,7 @@ describe "UserPages" do
       describe "after saving the user" do
         before { click_button submit }
 
-        it { should have_selector('h1', text: sample_email) }
+        it { should have_selector('h1', text: user.email) }
       end
     end
 
@@ -49,6 +49,43 @@ describe "UserPages" do
 
       it "should have email prefilled" do
         find_field("Email").value.should == bad_email
+      end
+    end
+  end
+
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    describe "without signing in" do
+      before { visit edit_user_path(user) }
+      it { should have_button("Sign in") }
+    end
+
+    describe "after signing in" do
+      before do
+        sign_in user
+        visit edit_user_path(user)
+      end
+
+      describe "with invalid information" do
+        before { click_button "Save" }
+
+        it { should have_field("Email") }
+        it { should have_button("Save") }
+      end
+
+      describe "with valid information" do
+        let(:new_email) { "newemail@example.com" }
+
+        before do
+          fill_in "Email", with: new_email
+          fill_in "Password", with: user.password
+          fill_in "Confirmation", with: user.password_confirmation
+          click_button "Save"
+        end
+
+        it { should have_selector('h1', text: new_email) }
+        specify { user.reload.email.should == new_email }
       end
     end
   end
