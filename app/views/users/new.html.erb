@@ -1,6 +1,7 @@
-<div class="container-fluid fill">
+<div class="container-fluid">
   <div class="row-fluid">
-    <div class="span12 pagination-centered">
+    <div class="span3"></div>
+    <div class="span6 pagination-centered" style="background-color: #666666; border-radius: 10px">
       <%= form_for(@user) do |f| %>
         <%= f.label :email %>
         <%= f.email_field :email %>
@@ -14,5 +15,6 @@
         <%= f.submit "Create my account" %>
       <% end %>
     </div>
+    <div class="span3"></div>
   </div>
 </div>
