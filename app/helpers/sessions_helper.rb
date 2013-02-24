@@ -6,8 +6,8 @@ module SessionsHelper
   end
 
   def sign_out
-    cookies.delete(:login_token)
     self.current_account = nil
+    cookies.delete(:login_token)
   end
 
   def current_account=(account)
@@ -21,5 +21,9 @@ module SessionsHelper
 
   def current_account?(account)
     account == current_account
+  end
+
+  def signed_in?
+    !current_account.nil?
   end
 end

@@ -7,6 +7,7 @@ describe "UserPages" do
   describe "signup page" do
     before { visit new_user_path }
 
+    it { should have_selector('input#user_name') }
     it { should have_selector('input#user_email') }
     it { should have_selector('input#user_password') }
     it { should have_selector('input#user_password_confirmation') }
@@ -27,6 +28,7 @@ describe "UserPages" do
       let(:user) { FactoryGirl.build(:user) }
 
       before do
+        fill_in "Name", with: user.name
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
         fill_in "Confirmation", with: user.password_confirmation
@@ -78,9 +80,11 @@ describe "UserPages" do
       end
 
       describe "with valid information" do
+        let(:new_name) { "username" }
         let(:new_email) { "newemail@example.com" }
 
         before do
+          fill_in "Name", with: new_name
           fill_in "Email", with: new_email
           fill_in "Password", with: user.password
           fill_in "Confirmation", with: user.password_confirmation
@@ -91,5 +95,15 @@ describe "UserPages" do
         specify { user.reload.email.should == new_email }
       end
     end
+  end
+
+  before do
+    @user = User.new(name: "Example User", email: "user@example.com", 
+                     password: "foobar", password_confirmation: "foobar")
+  end
+  subject { @user }
+  describe "remember token" do
+    before { @user.save }
+    its(:login_token) { should_not be_blank }
   end
 end
