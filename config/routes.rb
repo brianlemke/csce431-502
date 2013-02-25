@@ -19,6 +19,7 @@ TamuBulletin::Application.routes.draw do
       get :mainlist
     end
   end
+  match '/posters', to: 'posters#mainlist'
   
   resources :sessions, only: [:new, :create, :destroy]
   match '/signin',  to: 'sessions#new'
