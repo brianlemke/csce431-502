@@ -62,6 +62,11 @@ describe UsersController do
           post :create, { user: valid_params }
           response.should redirect_to(User.last)
         end
+
+        it "should not be admin" do
+          post :create, { user: valid_params }
+          User.last.should_not be_admin
+        end
       end
 
       describe "with invalid params" do

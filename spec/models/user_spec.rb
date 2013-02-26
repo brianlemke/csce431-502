@@ -8,6 +8,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_token     :string(255)
+#  name            :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -22,10 +24,12 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:admin) }
   it { should respond_to(:login_token) }
   it { should respond_to(:authenticate) }
 
   it { should be_valid }
+  it { should_not be_admin }
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -83,6 +87,15 @@ describe User do
     end
 
     it { should_not be_valid }
+  end
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { should be_admin }
   end
 
   describe "return value of authenticate method" do
