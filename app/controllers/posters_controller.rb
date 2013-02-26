@@ -9,11 +9,19 @@ class PostersController < ApplicationController
 
 #Eventually use this for main page and when searching
   def mainlist
-    @posters = Poster.all
+    if signed_in?
+      @posters = Poster.all
+    else
+      redirect_to signin_path
+    end
   end
 
   def show
-    @poster = Poster.find(params[:id])
+    if signed_in?
+      @poster = Poster.find(params[:id])
+    else
+      redirect_to signin_path
+    end
   end
 
   def new

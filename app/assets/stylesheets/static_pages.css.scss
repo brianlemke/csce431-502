@@ -6,11 +6,31 @@
 /* universal */
 
 html {
-  overflow-y: scroll;
+  overflow: auto;
+  margin-top: 40px;
+  height: 100%;
+
+  -webkit-box-shadow: inset 3px 3px 2px 2px rgba(0, 0, 0, .5);
+  box-shadow: inset 3px 3px 2px 2px rgba(0, 0, 0, .5);
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 24px;
+  padding-left: 24px;
+
+  background: inherit;
+
+  background: rgb(145,2,2);
+  background: -moz-linear-gradient(-45deg,  rgba(145,2,2,1) 0%, rgba(80,0,0,1) 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(145,2,2,1)), color-stop(100%,rgba(80,0,0,1)));
+  background: -webkit-linear-gradient(-45deg,  rgba(145,2,2,1) 0%,rgba(80,0,0,1) 100%);
+  background: -o-linear-gradient(-45deg,  rgba(145,2,2,1) 0%,rgba(80,0,0,1) 100%);
+  background: -ms-linear-gradient(-45deg,  rgba(145,2,2,1) 0%,rgba(80,0,0,1) 100%);
+  background: linear-gradient(135deg,  rgba(145,2,2,1) 0%,rgba(80,0,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#910202', endColorstr='#500000',GradientType=1 );
+  color:  #FFFFFF;
 }
 
 section {
@@ -40,6 +60,7 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  color: #000;
 }
 
 h2 {
@@ -48,7 +69,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #999;
+  color: #000;
 }
 
 p {
@@ -89,7 +110,7 @@ footer a {
 }  
 
 footer a:hover { 
-  color: #222;
+  color: #fff;
 }
 
 footer small {

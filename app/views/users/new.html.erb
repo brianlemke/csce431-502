@@ -1,23 +1,21 @@
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span3"></div>
-    <div class="span6 pagination-centered" style="background-color: #666666; border-radius: 10px">
-      <%= form_for(@user) do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+<div class="row-fluid">
+  <div class="span3"></div>
+  <div class="span6 pagination-centered">
+    <%= form_for(@user) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-        <%= f.label :email %>
-        <%= f.email_field :email %>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
 
-        <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation %>
-        </br>
-        <%= f.submit "Create my account" %>
-      <% end %>
-    </div>
-    <div class="span3"></div>
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+      </br>
+      <%= f.submit "Create my account" %>
+    <% end %>
   </div>
+  <div class="span3"></div>
 </div>
