@@ -44,14 +44,14 @@ class OrganizationsController < ApplicationController
 private
 
   def signed_in_organization
-    unless current_account.is_a? Organization
+    unless admin? || current_account.is_a?(Organization)
       redirect_to new_session_url, notice: "Please sign in"
     end
   end
 
   def correct_organization
-    @organization = current_account
-    unless @organization == Organization.find_by_id(params[:id])
+    @organization = Organization.find_by_id(params[:id])
+    unless admin? || @organization == current_account
       redirect_to root_path
     end
   end

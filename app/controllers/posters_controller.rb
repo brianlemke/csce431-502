@@ -1,6 +1,6 @@
 class PostersController < ApplicationController
   before_filter :signed_in_organization,
-                only: [:new, :create, :edit, :update, :destroy]
+                only: [:new, :create]
   before_filter :correct_organization, only: [:edit, :update, :destroy]
 
   def index
@@ -65,7 +65,10 @@ private
   end
 
   def correct_organization
-    @poster = @organization.posters.find_by_id(params[:id])
-    redirect_to root_path if @poster.nil?
+    @poster = Poster.find_by_id(params[:id])
+    unless admin?
+      @organization = current_account
+      redirect_to root_path unless @poster.organization == @organization
+    end
   end
 end

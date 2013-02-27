@@ -49,6 +49,31 @@ describe "Posters" do
     end
   end
 
+  describe "after logging in as admin" do
+
+    before do
+      user = FactoryGirl.create(:admin)
+      visit new_session_path
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+      click_button "Sign in"
+    end
+
+    describe "new poster page" do
+      before { visit new_poster_path }
+
+      it { should_not have_field("Title") }
+      it { should_not have_button("Create Poster") }
+    end
+
+    describe "edit poster page" do
+      before { visit edit_poster_path(poster) }
+
+      it { should have_field("Title") }
+      it { should have_button("Update Poster") }
+    end
+  end
+
   describe "after logging in" do
     before do
       visit new_session_path

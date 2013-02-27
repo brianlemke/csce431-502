@@ -26,4 +26,8 @@ module SessionsHelper
   def signed_in?
     !current_account.nil?
   end
+
+  def admin?
+    current_account.is_a?(User) && current_account.admin
+  end
 end

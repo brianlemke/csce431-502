@@ -48,7 +48,9 @@ private
   end
 
   def correct_user
-    @user = current_account
-    redirect_to root_path unless @user == User.find_by_id(params[:id])
+    @user = User.find_by_id(params[:id])
+    unless admin? || current_account == User.find_by_id(params[:id])
+      redirect_to root_path
+    end
   end
 end

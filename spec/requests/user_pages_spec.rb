@@ -63,6 +63,36 @@ describe "UserPages" do
       it { should have_button("Sign in") }
     end
 
+    describe "as other admin" do
+      let(:admin) do
+        FactoryGirl.create(:admin, email: "admin@example.com")
+      end
+
+      before do
+        sign_in admin
+        visit edit_user_path(user)
+      end
+
+      it { should have_field("Email") }
+      it { should have_button("Save") }
+
+      describe "with valid information" do
+        let(:new_name) { "username" }
+        let(:new_email) { "newemail@example.com" }
+
+        before do
+          fill_in "Edit your Username", with: new_name
+          fill_in "Email", with: new_email
+          fill_in "Password", with: user.password
+          fill_in "Confirmation", with: user.password_confirmation
+          click_button "Save"
+        end
+
+        it { should have_selector('h1', text: new_email) }
+        specify { user.reload.email.should == new_email }
+      end
+    end
+
     describe "after signing in" do
       before do
         sign_in user

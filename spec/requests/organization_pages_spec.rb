@@ -65,6 +65,18 @@ describe "OrganizationPages" do
       it { should have_button("Sign in") }
     end
 
+    describe "as admin" do
+      let(:admin) { FactoryGirl.create(:admin) }
+
+      before do
+        sign_in admin
+        visit edit_organization_path(organization)
+      end
+
+      it { should have_field("Email") }
+      it { should have_button("Save") }
+    end
+
     describe "after signing in" do
       before do
         sign_in organization
