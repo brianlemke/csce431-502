@@ -35,6 +35,9 @@ private
   end
 
   def create_login_token
-    self.login_token = SecureRandom.urlsafe_base64
+    begin
+      token = SecureRandom.urlsafe_base64
+    end while ModelName.where(:token => token).exists?
+    self.login_token = token
   end
 end

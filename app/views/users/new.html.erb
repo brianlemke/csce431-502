@@ -1,21 +1,28 @@
-<div class="row-fluid">
-  <div class="span3"></div>
-  <div class="span6 pagination-centered">
-    <%= form_for(@user) do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+<div class="container-fluid fill">
+    <div class="span6">
+      <h3>Create a new TAMU Bulletin Account</h3>
+      <p class="to-do">
+        # We can put pictures/icons/graphics about A&M or something here: e.g.
+      </p>
+      <img src="http://giving.tamu.edu/images/publications/SpiritMag/wallpapers/University/Academic_Large_1600x1200.jpg">
+    </div>
+    <div class="span5 pagination-centered">
+      <div class="row-fluid">
+      <%= form_for(@user) do |f| %>
+        <%= f.label :name, "Create a Username" %>
+        <%= f.text_field :name %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+        <%= f.label :password, "Create a password" %>
+        <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-      </br>
-      <%= f.submit "Create my account" %>
-    <% end %>
-  </div>
-  <div class="span3"></div>
+        <%= f.label :password_confirmation, "Confirm your password" %>
+        <%= f.password_field :password_confirmation %>
+        </br>
+        <%= f.submit "Create my account" %>
+        </div>
+      <% end %>
+    </div>
 </div>

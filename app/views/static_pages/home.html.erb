@@ -7,10 +7,15 @@
     This is the temporary home page for the TAMU Bulletin Board.
   </h2>
 
-  <div class="span11 pagination-centered">
-  	<li><%= link_to "New User", signup_path, class: "btn btn-large btn-primary" %></li>
-  	<li><%= link_to "New Poster", '/posters', class: "btn btn-large btn-primary" %></li>
-  	<li><%= link_to "New Organization", '/organizations/new', class: "btn btn-large btn-primary" %></li>
+  <div class="span12 pagination-centered">
+    <%= link_to "New Admin", '#', class: "btn btn-large btn-primary" %>
+  	<%= link_to "New User", signup_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "New Organization", '/organizations/new', class: "btn btn-large btn-primary" %>
+    <%= link_to "New Poster", '/posters', class: "btn btn-large btn-primary" %>
   </div>
-
+  <h2 class="to-do">
+    #Maybe put a sample poster carousel here or picture of mobile view (like Pinterest): e.g.
+  </h2>
+  <img src="http://biomed.tamu.edu/community/studentorg/img/student-org-header.jpg">
+  <img src="http://passets-ec.pinterest.com/images/signup_splash/loggedout_mac.png">
 </div>
