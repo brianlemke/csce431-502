@@ -28,10 +28,10 @@ describe "UserPages" do
       let(:user) { FactoryGirl.build(:user) }
 
       before do
-        fill_in "Name", with: user.name
+        fill_in "Create a Username", with: user.name
         fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
-        fill_in "Confirmation", with: user.password_confirmation
+        fill_in "Create a password", with: user.password
+        fill_in "Confirm your password", with: user.password_confirmation
       end
 
       it "should create a user" do
@@ -84,7 +84,7 @@ describe "UserPages" do
         let(:new_email) { "newemail@example.com" }
 
         before do
-          fill_in "Name", with: new_name
+          fill_in "Edit your Username", with: new_name
           fill_in "Email", with: new_email
           fill_in "Password", with: user.password
           fill_in "Confirmation", with: user.password_confirmation
