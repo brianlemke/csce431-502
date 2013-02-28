@@ -10,6 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_token     :string(255)
+#  verified        :boolean
 #
 
 class Organization < ActiveRecord::Base

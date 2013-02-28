@@ -10,6 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_token     :string(255)
+#  verified        :boolean
 #
 
 require 'spec_helper'
@@ -29,8 +30,10 @@ describe Organization do
   it { should respond_to(:login_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:posters) }
+  it { should respond_to(:verified) }
 
   it { should be_valid }
+  it { should_not be_verified }
 
   describe "when email is not present" do
     before { @organization.email = " " }
@@ -123,6 +126,19 @@ describe Organization do
     describe "login token should be created" do
       its(:login_token) { should_not be_nil }
     end
+
+    describe "it should not be verified" do
+      it { should_not be_verified }
+    end
+  end
+
+  describe "after being verified" do
+    before do
+      @organization.save
+      @organization.toggle!(:verified)
+    end
+
+    it { should be_verified }
   end
 
   describe "poster associations" do
