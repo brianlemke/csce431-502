@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OrganizationsController do
 
   before do
-    @organization = FactoryGirl.create(:organization)
+    @organization = FactoryGirl.create(:organization, verified: false)
   end
 
   let(:valid_params) do

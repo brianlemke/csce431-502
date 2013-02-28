@@ -4,7 +4,7 @@ describe "Posters" do
 
   subject { page }
 
-  let(:organization) { FactoryGirl.create(:organization) }
+  let(:organization) { FactoryGirl.create(:organization, verified: true) }
   let(:poster) { FactoryGirl.create(:poster, organization: organization) }
 
   describe "without logging in" do

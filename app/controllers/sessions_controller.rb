@@ -7,8 +7,12 @@ class SessionsController < ApplicationController
     account = User.find_by_email(params[:session][:email].downcase)
     account ||= Organization.find_by_email(params[:session][:email].downcase)
     if account && account.authenticate(params[:session][:password])
-      sign_in account
-      redirect_to account
+      if account.respond_to?(:verified) && !account.verified
+        render 'new'
+      else
+        sign_in account
+        redirect_to account
+      end
     else
       render 'new'
     end

@@ -43,7 +43,8 @@ describe "OrganizationPages" do
       describe "after saving the organization" do
         before { click_button submit }
 
-        it { should have_selector('h1', text: sample_org.name) }
+        it { should have_selector('a', text: 'Sign in') }
+        specify { Organization.first.verified.should be_false }
       end
     end
 
@@ -63,6 +64,7 @@ describe "OrganizationPages" do
     describe "without signing in" do
       before { visit edit_organization_path(organization) }
       it { should have_button("Sign in") }
+      it { should_not have_button("Save") }
     end
 
     describe "as admin" do
@@ -77,8 +79,18 @@ describe "OrganizationPages" do
       it { should have_button("Save") }
     end
 
+    describe "without being verified" do
+      before do
+        sign_in organization
+        visit edit_organization_path(organization)
+      end
+
+      it { should_not have_button("Save") }
+    end
+
     describe "after signing in" do
       before do
+        organization.toggle!(:verified)
         sign_in organization
         visit edit_organization_path(organization)
       end
