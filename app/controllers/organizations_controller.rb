@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   before_filter :signed_in_organization,
                 only: [:edit, :update, :destroy]
   before_filter :correct_organization,
-                only: [:edit, :update, :destroy]
+                only: [:edit, :update, :verify, :destroy]
 
   def new
     @organization = Organization.new
@@ -22,6 +22,11 @@ class OrganizationsController < ApplicationController
   end
 
   def edit
+  end
+
+  def verify
+    @organization.update_attribute(:verified, true)
+    render 'edit'
   end
 
   def update

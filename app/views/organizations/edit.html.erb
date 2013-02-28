@@ -27,6 +27,10 @@
         </br>
         <%= f.submit "Save" %>
       <% end %>
+
+      <% unless @organization.verified %>
+        <%= button_to "Verify", { action: "verify", id: @organization.to_param }, method: :put %>
+      <% end %>
     </div>
   </div>
 </div>

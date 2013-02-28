@@ -14,8 +14,12 @@ TamuBulletin::Application.routes.draw do
   resources :users
   match '/signup',  to: 'users#new'
 
-  resources :organizations
-  
+  resources :organizations do
+    member do
+      put :verify
+    end
+  end
+
   resources :posters do
     collection do
       get :mainlist
