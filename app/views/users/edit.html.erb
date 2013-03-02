@@ -20,6 +20,9 @@
 
           <%= f.label :password_confirmation, "Confirmation" %>
           <%= f.password_field :password_confirmation %>
+
+          <%= f.label :picture, "Profile Picture" %>
+          <%= f.file_field :picture %>
           </br>
           <%= f.submit "Save" %>
         <% end %>

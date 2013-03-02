@@ -41,7 +41,7 @@ describe "UserPages" do
       describe "after saving the user" do
         before { click_button submit }
 
-        it { should have_selector('h1', text: user.email) }
+        it { should have_selector('h4', text: user.email) }
       end
     end
 
@@ -88,7 +88,7 @@ describe "UserPages" do
           click_button "Save"
         end
 
-        it { should have_selector('h1', text: new_email) }
+        it { should have_selector('h4', text: new_email) }
         specify { user.reload.email.should == new_email }
       end
     end
@@ -121,7 +121,7 @@ describe "UserPages" do
           click_button "Save"
         end
 
-        it { should have_selector('h1', text: new_email) }
+        it { should have_selector('h4', text: new_email) }
         specify { user.reload.email.should == new_email }
       end
     end
