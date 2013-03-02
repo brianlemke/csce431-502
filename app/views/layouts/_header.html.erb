@@ -18,6 +18,11 @@
                 <% elsif is_organization? %>
                   <li><%= link_to "Organization Settings", edit_organization_path(current_account) %></li>
                 <% end %>
+                <% if admin? %>
+                  <li><%= link_to "View All Users", '#' %></li>
+                <% else %>
+                  <li><%= link_to "Cannot View All Users", '#' %></li>
+                <% end %>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", signout_path, method: "delete" %>

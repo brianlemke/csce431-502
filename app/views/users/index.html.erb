@@ -1,0 +1,27 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>User Email</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+    <th>Is Admin?</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.created_at %></td>
+    <td><%= user.updated_at %></td>
+    <td><%= user.admin %></td>
+    <td><%= link_to 'Show User', user %></td>
+    <td><%= link_to 'Edit', edit_poster_path(user) %></td>
+    <td><%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
