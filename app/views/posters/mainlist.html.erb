@@ -1,10 +1,55 @@
-<div class="container-fluid">
-<% @posters.each do |poster| %>
-  <div class="row-fluid">
-    <div class="span4">
-    	<%= link_to image_tag(poster.file , :alt => "Poster" , :size => "200x300"), poster %>
-    </div>
-    <div class="span8"><%= poster.title %></div>
-  </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tab2').isotope({
+            // options
+            itemSelector : '.item',
+            layoutMode : 'masonry'
+        });
+        $(window).smartresize();
+        $('.item').popover();
+        var timer = setTimeout(function(){
+            $('#tab2').isotope('shuffle');
+        },200);
+    });
+</script>
+
+<style>
+    .popover {
+        color: black;
+    }
+</style>
+
+<%= form_tag('/posters/mainlist', :method => 'get') do %>
+    <%= label_tag(:q, 'Search titles for:') %>
+    <%= text_field_tag :titleSearch, params[:titleSearch] %>
+    <%= label_tag(:q, 'Search organizations for:') %>
+    <%= text_field_tag :orgSearch, params[:orgSearch] %>
+    <%= submit_tag('Search') %>
 <% end %>
+
+<div class="container-fluid">
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li id="tab2tab" class="active"><a href="#tab2" data-toggle="tab">Grid View</a></li>
+      <li id="tab1tab" ><a href="#tab1" data-toggle="tab">List View</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane" id="tab1">
+        <% @posters.each do |poster| %>
+          <div class="row-fluid">
+            <div class="span4">
+                <%= link_to image_tag(poster.file , :alt => "Poster" , :size => "200x300"), poster %>
+            </div>
+            <div class="span8"><%= poster.title %></div>
+          </div>
+        <% end %>
+      </div>
+      <div class="tab-pane active" id="tab2">
+        <% @posters.each do |poster| %>
+            <div class="item" data-trigger="hover" data-content="<%= poster.title %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
+        <% end %>
+      </div>
+  </div>
 </div>
+

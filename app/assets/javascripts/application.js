@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require fake-element
+//= require jquery.ba-bbq.min
+//= require jquery.infinitescroll.min
+//= require jquery.isotope.min
+//= require make-big-graph-projects

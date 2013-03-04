@@ -10,7 +10,11 @@ class PostersController < ApplicationController
 #Eventually use this for main page and when searching
   def mainlist
     if signed_in?
-      @posters = Poster.all
+      @posters = []
+      @organizations = Organization.find(:all, :conditions => ['name LIKE ?', "%#{params[:orgSearch]}%"])
+      @organizations.each do |org|
+        @posters += org.posters.find(:all, :conditions => ['title LIKE ?', "%#{params[:titleSearch]}%"])
+      end
     else
       redirect_to signin_path
     end
