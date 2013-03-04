@@ -25,6 +25,8 @@
     <%= text_field_tag :titleSearch, params[:titleSearch] %>
     <%= label_tag(:q, 'Search organizations for:') %>
     <%= text_field_tag :orgSearch, params[:orgSearch] %>
+    <%= label_tag(:q, 'Search for date (YYYY-MM-DD):') %>
+    <%= text_field_tag :dateSearch, params[:dateSearch] %>
     <%= submit_tag('Search') %>
 <% end %>
 
