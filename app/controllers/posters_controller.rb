@@ -10,16 +10,22 @@ class PostersController < ApplicationController
 #Eventually use this for main page and when searching
   def mainlist
     if signed_in?
+      @allorganizations = Organization.all
+      @allposters = Poster.all
       @posters = []
       @organizations = Organization.find(:all, :conditions => ['name LIKE ?', "%#{params[:orgSearch]}%"])
       if params[:dateSearch] != ''
         @organizations.each do |org|
           @posters += org.posters.find(:all, :conditions => ['created_at BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%"])
         end
-      else
+      elsif params[:orgSearch] != ''
         @organizations.each do |org|
           @posters += org.posters.find(:all, :conditions => ['title LIKE ?', "%#{params[:titleSearch]}%"])
         end
+      elsif params[:titleSearch] != ''
+        @posters = Poster.find(:all, :conditions => ['title LIKE ?', "%#{params[:titleSearch]}%"])
+      else
+        @posters = Poster.all
       end
     else
       redirect_to signin_path

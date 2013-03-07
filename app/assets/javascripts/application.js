@@ -18,4 +18,5 @@
 //= require jquery.infinitescroll.min
 //= require jquery.isotope.min
 //= require make-big-graph-projects
-//= require jquery.datepick.min
+//= require jquery.cookie
+//= require jquery-ui.min

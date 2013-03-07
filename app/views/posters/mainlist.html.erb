@@ -1,5 +1,10 @@
 
 <script type="text/javascript">
+    function relayout() {
+        var timer = setTimeout(function(){
+            $('#tab2').isotope('reLayout');
+        },200);
+    }
     $(document).ready(function() {
         $('#tab2').isotope({
             // options
@@ -12,44 +17,84 @@
             $('#tab2').isotope('reLayout');
         },200);
     });
+    $(function() {
+        $('a[data-toggle="tab"]').on('shown', function(e){
+            //save the latest tab using a cookie:
+            $.cookie('last_tab', $(e.target).attr('href'));
+        });
+
+        //activate latest tab, if it exists:
+        var lastTab = $.cookie('last_tab');
+        if (lastTab) {
+            $('ul.nav-tabs').children().removeClass('active');
+            $('a[href='+ lastTab +']').parents('li:first').addClass('active');
+            $('div.tab-content').children().removeClass('active');
+            $(lastTab).addClass('active');
+        }
+    });
+    $(function() {
+        var availableTitles = [
+            <% @allposters.each do |poster| %>
+                "<%= poster.title %>",
+            <% end %>
+        ];
+        var availableOrganizations = [
+            <% @allorganizations.each do |organization| %>
+                "<%= organization.name %>",
+            <% end %>
+        ];
+        $( "#titles" ).autocomplete({
+            source: availableTitles
+        });
+        $( "#organizations" ).autocomplete({
+            source: availableOrganizations
+        });
+    });
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
 </script>
 
 <style>
     .popover {
         color: black;
     }
+    h3 {
+        color:  black;
+    }
 </style>
 
-<%= form_tag('/posters/mainlist', :method => 'get') do %>
-    <%= label_tag(:q, 'Search titles for:') %>
-    <%= text_field_tag :titleSearch, params[:titleSearch] %>
-    <%= label_tag(:q, 'Search organizations for:') %>
-    <%= text_field_tag :orgSearch, params[:orgSearch] %>
-    <%= label_tag(:q, 'Search for date (YYYY-MM-DD):') %>
-    <%= text_field_tag :dateSearch, params[:dateSearch] %>
-    <%= submit_tag('Search') %>
-<% end %>
-
+<div class="ui-widget">
+    <%= form_tag('/posters/mainlist', :method => 'get') do %>
+        <%= label_tag(:q, 'Search titles for:') %>
+        <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles" %>
+        <%= label_tag(:q, 'Search organizations for:') %>
+        <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations" %>
+        <%= label_tag(:q, 'Search for date (YYYY-MM-DD):') %>
+        <%= text_field_tag :dateSearch, params[:dateSearch], :id => "datepicker" %>
+        <%= submit_tag('Search') %>
+    <% end %>
+</div>
 <div class="container-fluid">
   <div class="tabbable">
     <ul class="nav nav-tabs">
-      <li id="tab2tab" class="active"><a href="#tab2" data-toggle="tab">Grid View</a></li>
+      <li id="tab2tab" class="active" onclick="relayout()"><a href="#tab2" data-toggle="tab">Grid View</a></li>
       <li id="tab1tab" ><a href="#tab1" data-toggle="tab">List View</a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane" id="tab1">
         <% @posters.each do |poster| %>
-          <div class="row-fluid">
-            <div class="span4">
-                <%= link_to image_tag(poster.file , :alt => "Poster" , :size => "200x300"), poster %>
+            <div class="row-fluid">
+              <div class="span4"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></div>
+              <div class="span8"><%= poster.title %></div>
             </div>
-            <div class="span8"><%= poster.title %></div>
-          </div>
         <% end %>
       </div>
-      <div class="tab-pane active" id="tab2">
+      <div class="tab-pane" id="tab2">
         <% @posters.each do |poster| %>
-            <div class="item" data-trigger="hover" data-content="<%= poster.title %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
+            <div class="item" data-trigger="hover" data-title="<%= poster.title %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
         <% end %>
       </div>
   </div>
