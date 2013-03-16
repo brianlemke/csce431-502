@@ -9,5 +9,7 @@
 	<%= image_tag @poster.file %>
 </p>
 
-<%= link_to 'Edit', edit_poster_path(@poster) %> |
-<%= link_to 'Back', posters_path %>
+<% if is_organization? %>
+	<%= link_to 'Edit', edit_poster_path(@poster) %> |
+	<%= link_to 'Back', posters_path %>
+<% end %>
