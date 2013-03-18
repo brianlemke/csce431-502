@@ -34,12 +34,12 @@
     });
     $(function() {
         var availableTitles = [
-            <% @allposters.each do |poster| %>
+            <% @posters.each do |poster| %>
                 "<%= poster.title %>",
             <% end %>
         ];
         var availableOrganizations = [
-            <% @allorganizations.each do |organization| %>
+            <% @organizations.each do |organization| %>
                 "<%= organization.name %>",
             <% end %>
         ];
@@ -88,7 +88,7 @@
         <% @posters.each do |poster| %>
             <div class="row-fluid">
               <div class="span4"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></div>
-              <div class="span8"><%= poster.title %></div>
+              <div class="span8"><%= poster.title%></div>
             </div>
         <% end %>
       </div>
