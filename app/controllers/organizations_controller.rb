@@ -26,6 +26,7 @@ class OrganizationsController < ApplicationController
 
   def verify
     @organization.update_attribute(:verified, true)
+    RegistrationMailer.verified(@organization).deliver
     render 'edit'
   end
 
