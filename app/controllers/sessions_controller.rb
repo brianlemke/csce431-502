@@ -18,6 +18,10 @@ class SessionsController < ApplicationController
     end
   end
 
+  def createExternal
+    render 'new'
+  end
+
   def destroy
     sign_out
     redirect_to home_path
