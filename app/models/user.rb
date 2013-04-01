@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   mount_uploader :picture, ProfilePictureUploader
   has_secure_password
 
+  has_many :subscriptions, dependent: :destroy
+
   before_save { |user| user.email = user.email.downcase }
   before_save :create_login_token
 

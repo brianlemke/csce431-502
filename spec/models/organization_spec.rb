@@ -10,7 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_token     :string(255)
-#  verified        :boolean
+#  verified        :boolean          default(FALSE)
 #
 
 require 'spec_helper'

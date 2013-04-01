@@ -54,6 +54,7 @@ class PostersController < ApplicationController
     @poster = @organization.posters.build(params[:poster])
 
     if @poster.save
+      RegistrationMailer.notify_subscriptions(@poster)
       redirect_to @poster, notice: 'Poster was successfully created.'
     else
       render action: "new"
