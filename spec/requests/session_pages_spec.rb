@@ -21,8 +21,6 @@ describe "SessionPages" do
         fill_in "Password", with: user.password
         click_button "Sign in"
       end
-
-      it { should have_selector('h4', text: user.email) }
     end
 
     describe "with invalid information" do

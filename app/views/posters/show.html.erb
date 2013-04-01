@@ -13,3 +13,12 @@
 	<%= link_to 'Edit', edit_poster_path(@poster) %> |
 	<%= link_to 'Back', posters_path %>
 <% end %>
+
+<hr />
+
+<h2>Comments</h2>
+<%= render :partial => 'comment', :collection => @poster.comments %>
+
+<% if signed_in? %>
+	<%= render "posters/comment_form" %>
+<% end %>

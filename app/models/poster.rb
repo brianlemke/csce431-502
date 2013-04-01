@@ -14,4 +14,6 @@ class Poster < ActiveRecord::Base
   attr_accessible :file, :title
   mount_uploader :file, PosterUploader
   belongs_to :organization
+  
+  has_many :comments, :dependent => :destroy
 end
