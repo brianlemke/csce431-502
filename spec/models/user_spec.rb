@@ -10,6 +10,7 @@
 #  login_token     :string(255)
 #  name            :string(255)
 #  admin           :boolean          default(FALSE)
+#  picture         :string(255)
 #
 
 require 'spec_helper'

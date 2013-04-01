@@ -10,19 +10,22 @@ class PostersController < ApplicationController
 #Eventually use this for main page and when searching
   def mainlist
     if signed_in?
-      @allorganizations = Organization.all
-      @allposters = Poster.all
+      @organizations = []
+      if params.has_key?(:orgSearch) && params[:orgSearch] != ''
+        @organizations = Organization.find(:all, :conditions => ['name LIKE ?', "%#{params[:orgSearch]}%"])
+      else
+        @organizations = Organization.all
+      end
       @posters = []
-      @organizations = Organization.find(:all, :conditions => ['name LIKE ?', "%#{params[:orgSearch]}%"])
-      if params[:dateSearch] != ''
+      if params.has_key?(:dateSearch) && params[:dateSearch] != ''
         @organizations.each do |org|
           @posters += org.posters.find(:all, :conditions => ['created_at BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%"])
         end
-      elsif params[:orgSearch] != ''
+      elsif params.has_key?(:orgSearch) && params[:orgSearch] != ''
         @organizations.each do |org|
           @posters += org.posters.find(:all, :conditions => ['title LIKE ?', "%#{params[:titleSearch]}%"])
         end
-      elsif params[:titleSearch] != ''
+      elsif params.has_key?(:titleSearch) && params[:titleSearch] != ''
         @posters = Poster.find(:all, :conditions => ['title LIKE ?', "%#{params[:titleSearch]}%"])
       else
         @posters = Poster.all
@@ -51,6 +54,7 @@ class PostersController < ApplicationController
     @poster = @organization.posters.build(params[:poster])
 
     if @poster.save
+      RegistrationMailer.notify_subscriptions(@poster)
       redirect_to @poster, notice: 'Poster was successfully created.'
     else
       render action: "new"

@@ -1,3 +1,10 @@
 <h1>
   <%= @organization.name %>
+  <% if is_user? %>
+    <% if is_subscribed?(@organization) %>
+      <%= button_to "Unsubscribe", action: "unsubscribe", id: @organization.id %>
+    <% else %>
+      <%= button_to "Subscribe", action: 'subscribe', id: @organization.id %>
+    <% end %>
+  <% end %>
 </h1>

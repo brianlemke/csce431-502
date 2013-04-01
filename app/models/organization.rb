@@ -10,7 +10,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  login_token     :string(255)
-#  verified        :boolean
+#  verified        :boolean          default(FALSE)
 #
 
 class Organization < ActiveRecord::Base
@@ -18,6 +18,7 @@ class Organization < ActiveRecord::Base
   has_secure_password
 
   has_many :posters, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   before_save { |organization| organization.email.downcase! }
   before_save :create_login_token

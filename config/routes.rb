@@ -18,6 +18,8 @@ TamuBulletin::Application.routes.draw do
   resources :organizations do
     member do
       put :verify
+      post :subscribe
+      post :unsubscribe
     end
   end
 

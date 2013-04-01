@@ -1,0 +1,11 @@
+<%= @user.name %>:
+
+<%= @organization.name %> has posted <%= @poster.title %>. Visit
+<%= poster_url(@poster) %> to see it.
+
+You received this message because you are subscribed to <%= @organization.name %>.
+You can unsubscribe at any time at <%= organization_url(@organization) %>.
+
+Thanks for participating,
+
+The TAMU Bulletin Team

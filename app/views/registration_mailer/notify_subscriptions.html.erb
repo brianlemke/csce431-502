@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p><%= @user.name %>:</p>
+
+    <p><%= @organization.name %> has posted <%= @poster.title %>. Visit
+    <%= poster_url(@poster) %> to see it.</p>
+
+    <p>You received this message because you are subscribed to <%= @organization.name %>.
+    You can unsubscribe at any time at <%= organization_url(@organization) %>.</p>
+
+    <p>Thanks for participating,</p>
+
+    <p>The TAMU Bulletin Team</p>
+  </body>
+  </html>
