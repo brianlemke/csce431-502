@@ -19,7 +19,24 @@ class SessionsController < ApplicationController
   end
 
   def createExternal
-    render 'new'
+    auth_hash = request.env['omniauth.auth']
+    account = User.find_by_facebookid(auth_hash['uid'])
+    if account
+      sign_in account
+      redirect_to account
+    else
+      account = User.create(:email => auth_hash['info']['email'], :name => auth_hash['info']['name'], :facebookid => auth_hash['uid'], :password_digest => "facebook-authorized account")
+      if account
+        if account.valid?
+          sign_in account
+          redirect_to account
+        else
+          render 'new'
+        end
+      else
+        render 'new'
+      end
+    end
   end
 
   def destroy
