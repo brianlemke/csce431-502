@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     redirect_to poster_path(@poster)
   end
 
+
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
