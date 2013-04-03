@@ -1,4 +1,6 @@
 TamuBulletin::Application.routes.draw do
+  resources :comments
+
 
   get "static_pages/home"
   get "static_pages/help"
@@ -24,7 +26,6 @@ TamuBulletin::Application.routes.draw do
   end
 
   resources :posters do
-    resources :comments
     collection do
       get :mainlist
     end

@@ -1,9 +1,0 @@
-<p><b>Add a comment:</b></p>
-<%= form_for([@poster, @poster.comments.build]) do |f| %>
-	<div class="field">
-		<%= f.text_area :body %>
-	</div>
-	<div class="actions">
-		<%= f.submit %>
-	</div>
-<% end %>
