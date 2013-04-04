@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#timeAndDatePicker').datetimepicker({
+          timeFormat: "hh:mm tt"
+      });
+  })
+</script>
+
 <%= form_for(@poster) do |f| %>
   <% if @poster.errors.any? %>
     <div id="error_explanation">
@@ -31,6 +39,10 @@
                         'Global Service', 'Greek Life', 'Healthy Living', 'Honor', 'Military', 'Professional/Career',
                         'Recreation', 'Religious', 'Residence Halls', 'Social and Political Issues', 'Special Interests',
                         'Spirit and Tradition', 'Sports Clubs', 'Student Government'] %>
+  </div>
+  <div class="field">
+    <%= f.label :event_date %><br />
+    <%= f.text_field :event_date, :id=>'timeAndDatePicker' %>
   </div>
   <div class="actions">
     <%= f.submit %>

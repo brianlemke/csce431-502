@@ -20,3 +20,4 @@
 //= require make-big-graph-projects
 //= require jquery.cookie
 //= require jquery-ui.min
+//= require jquery-ui-timepicker-addon.js

@@ -19,7 +19,7 @@ class PostersController < ApplicationController
       @posters = []
       if params.has_key?(:dateSearch) && params[:dateSearch] != ''
         @organizations.each do |org|
-          @posters += org.posters.find(:all, :conditions => ['created_at BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ? AND tag LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%"])
+          @posters += org.posters.find(:all, :conditions => ['event_date BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ? AND tag LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%"])
         end
       elsif params.has_key?(:orgSearch) && params[:orgSearch] != ''
         @organizations.each do |org|
