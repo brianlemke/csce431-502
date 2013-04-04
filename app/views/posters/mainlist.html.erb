@@ -16,6 +16,9 @@
         var timer = setTimeout(function(){
             $('#tab2').isotope('reLayout');
         },200);
+        if('<%= params[:tagSearch] %>' != '') {
+            document.getElementById('<%= params[:tagSearch] %>').selected = "selected";
+        }
     });
     $(function() {
         $('a[data-toggle="tab"]').on('shown', function(e){
@@ -68,12 +71,43 @@
 
 <div class="ui-widget">
     <%= form_tag('/posters/mainlist', :method => 'get') do %>
-        <%= label_tag(:q, 'Search titles for:') %>
+        <%= label_tag(:q, 'Filter titles for:') %>
         <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles" %>
-        <%= label_tag(:q, 'Search organizations for:') %>
+        <%= label_tag(:q, 'Filter organizations for:') %>
         <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations" %>
-        <%= label_tag(:q, 'Search for date (YYYY-MM-DD):') %>
+        <%= label_tag(:q, 'Filter for date (YYYY-MM-DD):') %>
         <%= text_field_tag :dateSearch, params[:dateSearch], :id => "datepicker" %>
+        <%= label_tag(:q, 'Filter for tags:') %>
+        <%= select_tag :tagSearch, "<option></option>
+                                    <option id='Agriculture'>Agriculture</option>
+                                    <option id='Business'>Business</option>
+                                    <option id='Bush School'>Bush School</option>
+                                    <option id='College of Science'>College of Science</option>
+                                    <option id='Education'>Education</option>
+                                    <option id='Engineering'>Engineering</option>
+                                    <option id='Geoscience'>Geoscience</option>
+                                    <option id='Graduate College'>Graduate College</option>
+                                    <option id='Health Science Center'>Health Science Center</option>
+                                    <option id='Liberal Arts'>Liberal Arts</option>
+                                    <option id='Arts and Culture'>Arts and Culture</option>
+                                    <option id='Campus Service'>Campus Service</option>
+                                    <option id='Community/Volunteer Service'>Community/Volunteer Service</option>
+                                    <option id='Cultural/International'>Cultural/International</option>
+                                    <option id='Enthusiasts'>Global Service</option>
+                                    <option id='Global Service'>Global Service</option>
+                                    <option id='Greek Life'>Greek Life</option>
+                                    <option id='Healthy Living'>Healthy Living</option>
+                                    <option id='Honor'>Honor</option>
+                                    <option id='Military'>Military</option>
+                                    <option id='Professional/Career'>Professional/Career</option>
+                                    <option id='Recreation'>Recreation</option>
+                                    <option id='Religious'>Religious</option>
+                                    <option id='Residence Halls'>Residence Halls</option>
+                                    <option id='Social and Political Issues'>Social and Political Issues</option>
+                                    <option id='Special Interests'>Special Interests</option>
+                                    <option id='Spirit and Tradition'>Spirit and Tradition</option>
+                                    <option id='Sports Clubs'>Sports Clubs</option>
+                                    <option id='Student Government'>Student Government</option>".html_safe %>
         <%= submit_tag('Search') %>
     <% end %>
 </div>
@@ -88,13 +122,13 @@
         <% @posters.each do |poster| %>
             <div class="row-fluid">
               <div class="span4"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></div>
-              <div class="span8"><%= poster.title%></div>
+              <div class="span8"><%= poster.title%><br /><%= poster.description%></div>
             </div>
         <% end %>
       </div>
       <div class="tab-pane" id="tab2">
         <% @posters.each do |poster| %>
-            <div class="item" data-trigger="hover" data-title="<%= poster.title %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
+            <div class="item" data-trigger="hover" data-title="<%= poster.title %>" data-content="<%= poster.description %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
         <% end %>
       </div>
   </div>
