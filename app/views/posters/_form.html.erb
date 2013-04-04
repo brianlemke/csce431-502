@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#timeAndDatePicker').datetimepicker({
+          timeFormat: "hh:mm tt"
+      });
+  })
+</script>
+
 <%= form_for(@poster) do |f| %>
   <% if @poster.errors.any? %>
     <div id="error_explanation">
@@ -18,6 +26,23 @@
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :tag %><br />
+    <%= f.select :tag, ['', 'Agriculture', 'Business', 'Bush School', 'College of Science', 'Education', 'Engineering',
+                        'Geoscience', 'Graduate College', 'Health Science Center', 'Liberal Arts', 'Arts and Culture',
+                        'Campus Service', 'Community/Volunteer Service', 'Cultural/International', 'Enthusiasts',
+                        'Global Service', 'Greek Life', 'Healthy Living', 'Honor', 'Military', 'Professional/Career',
+                        'Recreation', 'Religious', 'Residence Halls', 'Social and Political Issues', 'Special Interests',
+                        'Spirit and Tradition', 'Sports Clubs', 'Student Government'] %>
+  </div>
+  <div class="field">
+    <%= f.label :event_date %><br />
+    <%= f.text_field :event_date, :id=>'timeAndDatePicker' %>
   </div>
   <div class="actions">
     <%= f.submit %>

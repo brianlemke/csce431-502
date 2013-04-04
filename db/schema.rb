@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20130331233750) do
   create_table "posters", :force => true do |t|
     t.string   "file"
     t.string   "title"
+    t.string   "description"
+    t.string   "tag"
+    t.datetime "event_date"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "organization_id"
