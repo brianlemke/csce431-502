@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :picture, :facebookid, :password_digest
   mount_uploader :picture, ProfilePictureUploader
   has_secure_password
+  has_one :loginprovider
 
   before_save { |user| user.email = user.email.downcase }
   before_save :create_login_token
@@ -25,8 +26,8 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, :if => :facebookid_is_nil
-  validates :password_confirmation, presence: true, on: :create, :if => :facebookid_is_nil
+  validates :password, presence: true, :if => :external_login_not_provided
+  validates :password_confirmation, presence: true, on: :create, :if => :external_login_not_provided
 
   validate :email_absent_in_organizations
 
@@ -42,7 +43,7 @@ private
     self.login_token = SecureRandom.urlsafe_base64
   end
 
-  def facebookid_is_nil
-    self.facebookid.blank?
+  def external_login_not_provided
+    self.password_digest != "external-authorized account"
   end
 end
