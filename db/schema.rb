@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331233750) do
+ActiveRecord::Schema.define(:version => 20130406171358) do
 
   create_table "comments", :force => true do |t|
     t.string   "name"
@@ -23,8 +23,6 @@ ActiveRecord::Schema.define(:version => 20130331233750) do
   end
 
   add_index "comments", ["poster_id"], :name => "index_comments_on_poster_id"
-  
-ActiveRecord::Schema.define(:version => 20130406171358) do
 
   create_table "loginproviders", :force => true do |t|
     t.integer "user_id"
