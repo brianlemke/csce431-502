@@ -13,15 +13,19 @@
   <b>Tag:</b>
   <%= @poster.tag %>
   <br />
+  <b>Location:</b>
+  <%= @poster.location %>
+  <br />
   <b>Time and Date:</b>
-  <%= @poster.event_date %>
+  <%= @poster.event_start_date %> - <%= @poster.event_end_date %>
   <br />
 </p>
 
 <p>
 	<%= image_tag @poster.file %>
 </p>
-
+<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%= @poster.title %>&dates=<%= @poster.event_start_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>/<%= @poster.event_end_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>&details=<%= @poster.description %>&location=<%= @poster.location %>&trp=false&sprop=TAMU%20Bulletin&sprop=name:http%3A%2F%2Fbulletin.tamu.edu" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
+<br /><br />
 <span class='st_facebook_large' displayText='Facebook'></span>
 <span class='st_googleplus_large' displayText='Google +'></span>
 <span class='st_twitter_large' displayText='Tweet'></span>

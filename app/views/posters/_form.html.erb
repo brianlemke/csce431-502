@@ -3,6 +3,9 @@
       $('#timeAndDatePicker').datetimepicker({
           timeFormat: "hh:mm tt"
       });
+      $('#timeAndDatePicker2').datetimepicker({
+          timeFormat: "hh:mm tt"
+      });
   })
 </script>
 
@@ -32,6 +35,10 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_area :location %>
+  </div>
+  <div class="field">
     <%= f.label :tag %><br />
     <%= f.select :tag, ['', 'Agriculture', 'Business', 'Bush School', 'College of Science', 'Education', 'Engineering',
                         'Geoscience', 'Graduate College', 'Health Science Center', 'Liberal Arts', 'Arts and Culture',
@@ -41,8 +48,12 @@
                         'Spirit and Tradition', 'Sports Clubs', 'Student Government'] %>
   </div>
   <div class="field">
-    <%= f.label :event_date %><br />
-    <%= f.text_field :event_date, :id=>'timeAndDatePicker' %>
+    <%= f.label :event_start_date %><br />
+    <%= f.text_field :event_start_date, :id=>'timeAndDatePicker' %>
+  </div>
+  <div class="field">
+    <%= f.label :event_end_date %><br />
+    <%= f.text_field :event_end_date, :id=>'timeAndDatePicker2' %>
   </div>
   <div class="actions">
     <%= f.submit %>

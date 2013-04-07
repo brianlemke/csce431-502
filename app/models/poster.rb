@@ -13,7 +13,7 @@
 #
 
 class Poster < ActiveRecord::Base
-  attr_accessible :file, :title, :description, :tag, :event_date
+  attr_accessible :file, :title, :description, :location, :tag, :event_start_date, :event_end_date
   mount_uploader :file, PosterUploader
   belongs_to :organization
 end
