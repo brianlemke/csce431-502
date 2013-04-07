@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20130331233750) do
   end
 
   add_index "comments", ["poster_id"], :name => "index_comments_on_poster_id"
+  
+ActiveRecord::Schema.define(:version => 20130406171358) do
+
+  create_table "loginproviders", :force => true do |t|
+    t.integer "user_id"
+    t.string  "provider"
+    t.string  "loginid"
+  end
 
   create_table "organizations", :force => true do |t|
     t.string   "email"

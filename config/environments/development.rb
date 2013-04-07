@@ -51,4 +51,6 @@ TamuBulletin::Application.configure do
     port: 3000
   }
 
+  # No SSL for Facebook login
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end
