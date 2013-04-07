@@ -7,17 +7,19 @@
   <b>Title:</b>
   <%= @poster.title %>
   <br />
+  <b>Organization:</b>
+  <a href="../organizations/<%= @poster.organization_id %>"><%= @poster.organization.name%></a><br />
   <b>Description:</b>
   <%= @poster.description %>
   <br />
   <b>Tag:</b>
-  <%= @poster.tag %>
+  <a href="mainlist?tagSearch=<%= @poster.tag %>"><%= @poster.tag %></a>
   <br />
   <b>Location:</b>
-  <%= @poster.location %>
+  <a href="http://maps.google.com/?q=<%= @poster.location%>"><%= @poster.location %></a>
   <br />
   <b>Time and Date:</b>
-  <%= @poster.event_start_date %> - <%= @poster.event_end_date %>
+  <%= @poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %> - <%= @poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %>
   <br />
 </p>
 
