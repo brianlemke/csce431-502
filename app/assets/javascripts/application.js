@@ -21,4 +21,3 @@
 //= require jquery.cookie
 //= require jquery-ui.min
 //= require jquery-ui-timepicker-addon.js
-//= require fullcalendar.min.js
