@@ -19,6 +19,35 @@
         if('<%= params[:tagSearch] %>' != '') {
             document.getElementById('<%= params[:tagSearch] %>').selected = "selected";
         }
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            editable: true,
+            events: [
+                <% @posters.each do |poster| %>
+                    {
+                        title: "<%= @poster.title%>",
+                        start: new Date(<%= @poster.event_start_date.year %>,
+                            <%= @poster.event_start_date.month %>,
+                            <%= @poster.event_start_date.day %>,
+                            <%= @poster.event_start_date.hour %>,
+                            <%= @poster.event_start_date.minute %>),
+                        end: new Date(<%= @poster.event_end_date.year %>,
+                                <%= @poster.event_end_date.month %>,
+                                <%= @poster.event_end_date.day %>,
+                                <%= @poster.event_end_date.hour %>,
+                                <%= @poster.event_end_date.minute %>)
+                    },
+                <% end %>
+            ]
+        });
     });
     $(function() {
         $('a[data-toggle="tab"]').on('shown', function(e){
@@ -114,8 +143,10 @@
 <div class="container-fluid">
   <div class="tabbable">
     <ul class="nav nav-tabs">
-      <li id="tab2tab" class="active" onclick="relayout()"><a href="#tab2" data-toggle="tab">Grid View</a></li>
-      <li id="tab1tab" ><a href="#tab1" data-toggle="tab">List View</a></li>
+      <li id="tab1tab"  class="active"><a href="#tab1" data-toggle="tab">List View</a></li>
+      <li id="tab2tab" onclick="relayout()"><a href="#tab2" data-toggle="tab">Grid View</a></li>
+      <li id="tab3tab"><a href="#tab3" data-toggle="tab">Calendar View</a></li>
+
     </ul>
     <div class="tab-content">
       <div class="tab-pane" id="tab1">
@@ -130,6 +161,9 @@
         <% @posters.each do |poster| %>
             <div class="item" data-trigger="hover" data-title="<%= poster.title %>" data-content="<%= poster.description %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
         <% end %>
+      </div>
+      <div class="tab-pane" id="tab3">
+        <div id="calendar"></div>
       </div>
   </div>
 </div>
