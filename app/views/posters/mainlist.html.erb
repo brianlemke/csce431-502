@@ -73,6 +73,7 @@
     <%= form_tag('/posters/mainlist', :method => 'get') do %>
         <%= label_tag(:q, 'Filter titles for:') %>
         <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles" %>
+
         <%= label_tag(:q, 'Filter organizations for:') %>
         <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations" %>
         <%= label_tag(:q, 'Filter for date (YYYY-MM-DD):') %>
@@ -108,6 +109,8 @@
                                     <option id='Spirit and Tradition'>Spirit and Tradition</option>
                                     <option id='Sports Clubs'>Sports Clubs</option>
                                     <option id='Student Government'>Student Government</option>".html_safe %>
+        <%= label_tag(:q, 'Filter descriptions for:') %>
+        <%= text_field_tag :descriptionSearch, params[:descriptionSearch]%>
         <%= submit_tag('Search') %>
     <% end %>
 </div>
