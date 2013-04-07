@@ -14,9 +14,6 @@ module SessionsHelper
     @current_acount = account
   end
 
-  def current_user
-    @current_user = User.find_by_login_token(cookies[:login_token])
-  end
   def current_account
     @current_account ||= User.find_by_login_token(cookies[:login_token])
     @current_account ||= Organization.find_by_login_token(cookies[:login_token])
