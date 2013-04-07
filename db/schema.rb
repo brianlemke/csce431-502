@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20130302024810) do
 
+  create_table "loginproviders", :force => true do |t|
+    t.string  "provider"
+    t.string  "loginid"
+  end
+
   create_table "organizations", :force => true do |t|
     t.string   "email"
     t.string   "name"
