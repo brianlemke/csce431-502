@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home",    home_path %></li>
           <% if signed_in? %>
-            <li><%= link_to "Posters", '/posters/mainlist' %></li>
+            <li><%= link_to "Posters", posters_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
@@ -19,9 +19,7 @@
                   <li><%= link_to "Organization Settings", edit_organization_path(current_account) %></li>
                 <% end %>
                 <% if admin? %>
-                  <li><%= link_to "View All Users", '#' %></li>
-                <% else %>
-                  <li><%= link_to "Cannot View All Users", '#' %></li>
+                  <li><%= link_to "View All Users", users_path %></li>
                 <% end %>
                 <li class="divider"></li>
                 <li>
