@@ -8,6 +8,7 @@ gem 'bcrypt-ruby'
 gem 'carrierwave'
 gem 'font-awesome-sass-rails'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development, :test do
   gem 'rspec-rails'
