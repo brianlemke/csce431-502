@@ -22,5 +22,7 @@ FactoryGirl.define do
     file "dummy.jpg"
     title "Test Poster"
     organization
+    event_start_date "2010-01-05T12:34:00"
+    event_end_date "2010-01-05T14:10:00"
   end
 end

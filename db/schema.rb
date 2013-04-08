@@ -49,10 +49,12 @@ ActiveRecord::Schema.define(:version => 20130406171358) do
     t.string   "title"
     t.string   "description"
     t.string   "tag"
-    t.datetime "event_date"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "organization_id"
+    t.string   "location"
+    t.datetime "event_start_date"
+    t.datetime "event_end_date"
   end
 
   add_index "posters", ["organization_id"], :name => "index_posters_on_organization_id"
@@ -65,6 +67,13 @@ ActiveRecord::Schema.define(:version => 20130406171358) do
   end
 
   add_index "subscriptions", ["user_id", "organization_id"], :name => "index_subscriptions_on_user_id_and_organization_id"
+
+  create_table "userSavedPosters", :force => true do |t|
+    t.integer "userID"
+    t.integer "posterID"
+  end
+
+  add_index "userSavedPosters", ["userID", "posterID"], :name => "index_userSavedPosters_on_userID_and_posterID"
 
   create_table "users", :force => true do |t|
     t.string   "email"

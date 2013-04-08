@@ -73,6 +73,7 @@
     <%= form_tag('/posters/mainlist', :method => 'get') do %>
         <%= label_tag(:q, 'Filter titles for:') %>
         <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles" %>
+
         <%= label_tag(:q, 'Filter organizations for:') %>
         <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations" %>
         <%= label_tag(:q, 'Filter for date (YYYY-MM-DD):') %>
@@ -108,27 +109,30 @@
                                     <option id='Spirit and Tradition'>Spirit and Tradition</option>
                                     <option id='Sports Clubs'>Sports Clubs</option>
                                     <option id='Student Government'>Student Government</option>".html_safe %>
+        <%= label_tag(:q, 'Filter descriptions for:') %>
+        <%= text_field_tag :descriptionSearch, params[:descriptionSearch]%>
         <%= submit_tag('Search') %>
     <% end %>
 </div>
 <div class="container-fluid">
   <div class="tabbable">
     <ul class="nav nav-tabs">
-      <li id="tab2tab" class="active" onclick="relayout()"><a href="#tab2" data-toggle="tab">Grid View</a></li>
-      <li id="tab1tab" ><a href="#tab1" data-toggle="tab">List View</a></li>
+
+      <li id="tab1tab" class="active"><a href="#tab1" data-toggle="tab">List View</a></li>
+      <li id="tab2tab" onclick="relayout()"><a href="#tab2" data-toggle="tab">Grid View</a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane" id="tab1">
         <% @posters.each do |poster| %>
             <div class="row-fluid">
-              <div class="span4"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></div>
-              <div class="span8"><%= poster.title%><br /><%= poster.description%></div>
+              <div class="span4"><a href="<%= poster.id %>"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></a></div>
+              <div class="span8"><b><a href="<%= poster.id %>"><%= poster.title%></a></b><br /><b>Start: </b><%= poster.event_start_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><b>End: </b><%= poster.event_end_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><b>Location: </b><a href="http://maps.google.com/?q=<%= poster.location%>"><%= poster.location%></a><br /><b>Organization: </b><a href="../organizations/<%= poster.organization_id %>"><%= poster.organization.name%></a><br /><b>Tag: </b><a href="mainlist?tagSearch=<%= poster.tag %>"><%= poster.tag%></a><br /><%= poster.description%></div>
             </div>
         <% end %>
       </div>
       <div class="tab-pane" id="tab2">
         <% @posters.each do |poster| %>
-            <div class="item" data-trigger="hover" data-title="<%= poster.title %>" data-content="<%= poster.description %>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
+            <div class="item" data-trigger="hover" data-title="<b><%= poster.title %></b>" data-content="<b>Start: </b><%= poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><b>End: </b><%= poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><b>Location: </b><%= poster.location%><br /><b>Organization: </b><%= poster.organization.name%><br /><b>Tag: </b><%= poster.tag%><br /><%= poster.description%>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
         <% end %>
       </div>
   </div>

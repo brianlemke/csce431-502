@@ -19,14 +19,16 @@ class PostersController < ApplicationController
       @posters = []
       if params.has_key?(:dateSearch) && params[:dateSearch] != ''
         @organizations.each do |org|
-          @posters += org.posters.find(:all, :conditions => ['event_date BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ? AND tag LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%"])
+          @posters += org.posters.find(:all, :conditions => ['event_start_date BETWEEN date(?) AND date(?, "+1 day") AND title LIKE ? AND tag LIKE ? AND description LIKE ?', "#{params[:dateSearch]}", "#{params[:dateSearch]}", "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%", "%#{params[:descriptionSearch]}%"])
         end
       elsif params.has_key?(:orgSearch) && params[:orgSearch] != ''
         @organizations.each do |org|
-          @posters += org.posters.find(:all, :conditions => ['title LIKE ? AND tag LIKE ?', "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%"])
+          @posters += org.posters.find(:all, :conditions => ['title LIKE ? AND tag LIKE ? AND description LIKE ?', "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%", "%#{params[:descriptionSearch]}%"])
         end
       elsif params.has_key?(:titleSearch) && params[:titleSearch] != ''
-        @posters = Poster.find(:all, :conditions => ['title LIKE ? AND tag LIKE ?', "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%"])
+        @posters = Poster.find(:all, :conditions => ['title LIKE ? AND tag LIKE ? AND description LIKE ?', "%#{params[:titleSearch]}%", "%#{params[:tagSearch]}%", "%#{params[:descriptionSearch]}%"])
+      elsif params.has_key?(:descriptionSearch) && params[:descriptionSearch] != ''
+        @posters = Poster.find(:all, :conditions => ['tag LIKE ? AND description LIKE ?', "%#{params[:tagSearch]}%", "%#{params[:descriptionSearch]}%"])
       elsif params.has_key?(:tagSearch) && params[:tagSearch] != ''
         @posters = Poster.find(:all, :conditions => ['tag LIKE ?', "%#{params[:tagSearch]}%"])
       else
