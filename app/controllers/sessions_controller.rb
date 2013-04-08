@@ -25,7 +25,11 @@ class SessionsController < ApplicationController
       sign_in account_login.user
       redirect_to account_login.user
     else
-      account = User.create(:email => auth_hash['info']['email'], :name => auth_hash['info']['name'], :password_digest => "external-authorized account")
+      email_external = auth_hash['info']['email']
+      if !email_external
+        email_external = 'no@email.com'
+      end
+      account = User.create(:email => email_external, :name => auth_hash['info']['name'], :password_digest => "external-authorized account")
       if account
         if account.valid?
           account.loginprovider = Loginprovider.create(:provider => auth_hash['provider'], :loginid => auth_hash['uid'])
