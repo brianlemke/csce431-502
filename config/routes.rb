@@ -11,8 +11,7 @@ TamuBulletin::Application.routes.draw do
   match '/help',     to: 'static_pages#help'
   match '/about',    to: 'static_pages#about'
   match '/contact',  to: 'static_pages#contact'
-  match '/posters',  to: 'posters#mainlist'
-  match '/users',    to: 'users#index'
+  get   '/posters',  to: 'posters#mainlist'
 
   resources :users
   match '/signup',  to: 'users#new'
