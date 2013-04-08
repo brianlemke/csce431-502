@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302024810) do
+ActiveRecord::Schema.define(:version => 20130408001154) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "body"
+    t.integer  "poster_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["poster_id"], :name => "index_comments_on_poster_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "email"
@@ -30,17 +41,31 @@ ActiveRecord::Schema.define(:version => 20130302024810) do
   create_table "posters", :force => true do |t|
     t.string   "file"
     t.string   "title"
-    t.string   "description"
-    t.string   "tag"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "organization_id"
     t.string   "location"
     t.datetime "event_start_date"
     t.datetime "event_end_date"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "organization_id"
   end
 
   add_index "posters", ["organization_id"], :name => "index_posters_on_organization_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "subscriptions", ["user_id", "organization_id"], :name => "index_subscriptions_on_user_id_and_organization_id"
+
+  create_table "userSavedPosters", :force => true do |t|
+    t.integer "userID"
+    t.integer "posterID"
+  end
+
+  add_index "userSavedPosters", ["userID", "posterID"], :name => "index_userSavedPosters_on_userID_and_posterID"
 
   create_table "users", :force => true do |t|
     t.string   "email"
