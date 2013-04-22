@@ -59,23 +59,27 @@ class PostersController < ApplicationController
 
     if @poster.save
       RegistrationMailer.notify_subscriptions(@poster)
+      flash[:success] = "Poster was successfully created"
       redirect_to @poster, notice: 'Poster was successfully created.'
     else
+      flash[:error] = "Poster was not created"
       render action: "new"
     end
   end
 
   def update
     if @poster.update_attributes(params[:poster])
+      flash[:success] = "Poster was successfully edited"
       redirect_to @poster, notice: 'Poster was successfully updated.'
     else
+      flash[:error] = "Poster was not edited"
       render action: "edit"
     end
   end
 
   def destroy
     @poster.destroy
-
+    flash[:success] = "Poster successfully destroyed"
     redirect_to posters_url
   end
 
@@ -84,6 +88,7 @@ private
   def signed_in_organization
     @organization = current_account
     unless @organization.is_a? Organization
+      flash[:error] = "You are not an organization"
       redirect_to new_session_url, notice: "Please sign in"
     end
   end
@@ -92,6 +97,7 @@ private
     @poster = Poster.find_by_id(params[:id])
     unless admin?
       @organization = current_account
+      flash[:error] = "This is not your poster"
       redirect_to root_path unless @poster.organization == @organization
     end
   end

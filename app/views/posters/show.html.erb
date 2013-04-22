@@ -1,26 +1,40 @@
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "83c3ce0f-f04d-4a49-a7b5-061ef8997ec5", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-<p id="notice"><%= notice %></p>
+<% if flash[:success] %>
+    <p><%= flash[:success] %></p>
+<% end %>
 
 <p>
-  <b>Title:</b>
-  <%= @poster.title %>
-  <br />
-  <b>Organization:</b>
-  <%= link_to organization_url(@poster.organization), @poster.organization.name %>
-  <b>Description:</b>
-  <%= @poster.description %>
-  <br />
-  <b>Tag:</b>
-  <a href="mainlist?tagSearch=<%= @poster.tag %>"><%= @poster.tag %></a>
-  <br />
-  <b>Location:</b>
-  <a href="http://maps.google.com/?q=<%= @poster.location%>"><%= @poster.location %></a>
-  <br />
-  <b>Time and Date:</b>
-  <%= @poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %> - <%= @poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %>
-  <br />
+  <% if @poster.title != '' %>
+      <b>Title:</b>
+      <%= @poster.title %>
+      <br />
+  <% end %>
+  <% if not @poster.organization.nil? %>
+      <b>Organization:</b>
+      <%= link_to @poster.organization.name, organization_url(@poster.organization) %>
+      <br />
+  <% end %>
+  <% if @poster.description != '' %>
+      <b>Description:</b>
+      <%= @poster.description %>
+      <br />
+  <% end %>
+  <% if @poster.tag != '' %>
+      <b>Tag:</b>
+      <a href="mainlist?tagSearch=<%= @poster.tag %>"><%= @poster.tag %></a>
+      <br />
+  <% end %>
+  <% if @poster.location != '' %>
+      <b>Location:</b>
+      <a href="http://maps.google.com/?q=<%= @poster.location%>"><%= @poster.location %></a>
+      <br />
+  <% end %>
+  <% if not @poster.event_start_date.nil? and not @poster.event_end_date.nil? %>
+      <b>Time and Date:</b>
+      <%= @poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %> - <%= @poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %>
+      <br />
+  <% end %>
 </p>
 
 <p>
@@ -31,19 +45,18 @@
 	<%= link_to 'Edit', edit_poster_path(@poster) %> |
 	<%= link_to 'Back', posters_path %>
 <% end %>
-
-<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%= @poster.title %>&dates=<%= @poster.event_start_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>/<%= @poster.event_end_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>&details=<%= @poster.description %>&location=<%= @poster.location %>&trp=false&sprop=TAMU%20Bulletin&sprop=name:http%3A%2F%2Fbulletin.tamu.edu" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
 <br /><br />
+<% if not @poster.event_start_date.nil? and not @poster.event_end_date.nil? %>
+    <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<%= @poster.title %>&dates=<%= @poster.event_start_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>/<%= @poster.event_end_date.to_default_s.sub('-', '').sub('-', '').sub(' ','T').sub(':', '').sub(':', '')[0..-5] %>&details=<%= @poster.description %>&location=<%= @poster.location %>&trp=false&sprop=TAMU%20Bulletin&sprop=name:http%3A%2F%2Fbulletin.tamu.edu" target="_blank"><img src="//www.google.com/calendar/images/ext/gc_button2.gif" border=0></a>
 
+<% end %>
+<br /><br />
 <span class='st_facebook_large' displayText='Facebook'></span>
 <span class='st_googleplus_large' displayText='Google +'></span>
 <span class='st_twitter_large' displayText='Tweet'></span>
 <span class='st_pinterest_large' displayText='Pinterest'></span>
 
 <br />
-<%= link_to 'Edit', edit_poster_path(@poster) %> |
-<%= link_to 'Back', posters_path %>
-
 <hr />
 
 <h2>Comments</h2>

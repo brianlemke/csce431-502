@@ -1,5 +1,7 @@
 <h1>New poster</h1>
-
+<% if flash[:error] %>
+    <p><%= flash[:error] %></p>
+<% end %>
 <%= render 'form' %>
 
 <%= link_to 'Back', posters_path %>

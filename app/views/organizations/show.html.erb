@@ -1,5 +1,58 @@
-<h1>
-  <%= @organization.name %>
+<script type="text/javascript">
+    function relayout() {
+        var timer = setTimeout(function(){
+            $('#grid').isotope('reLayout');
+        },500);
+    }
+    $(document).ready(function() {
+        $('#grid').isotope({
+            // options
+            itemSelector : '.item',
+            layoutMode : 'masonry'
+        });
+        $(window).smartresize();
+        $('.item').popover();
+        var timer = setTimeout(function(){
+            $('#tab2').isotope('reLayout');
+        },500);
+    });
+</script>
+
+<style>
+    .popover {
+        color: black;
+    }
+    h3 {
+        color:  black;
+    }
+</style>
+
+<% if flash[:success] %>
+    <p ><%= flash[:success] %></p>
+<% end %>
+<% if flash[:error] %>
+    <p ><%= flash[:error] %></p>
+<% end %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1 style="text-align:left; padding-left: 20px;"><%= @organization.name %></h1>
+    </div>
+    <div class="span12">
+      <b><%= @organization.email%></b>
+    </div>
+    <div class="span12">
+      <%= @organization.description%>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row-fluid" id="grid">
+    <% for poster in @organization.posters %>
+        <div class="item" data-trigger="hover" data-title="<b><%= poster.title %></b>" data-content="<% if not poster.event_start_date.nil? and not poster.event_end_date.nil? %><b>Start: </b><<%= poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><b>End: </b><%= poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><% end %><b>Location: </b><%= poster.location%><br /><b>Organization: </b><%= poster.organization.name%><br /><b>Tag: </b><%= poster.tag%><br /><%= poster.description%>"><a href=<%= poster.id %> ><%= image_tag poster.file , :alt => poster.title , :size => "200x300" %></a></div>
+    <% end %>
+  </div>
+</div>
   <% if is_user? %>
     <% if is_subscribed?(@organization) %>
       <%= button_to "Unsubscribe", action: "unsubscribe", id: @organization.id %>
@@ -7,4 +60,3 @@
       <%= button_to "Subscribe", action: 'subscribe', id: @organization.id %>
     <% end %>
   <% end %>
-</h1>

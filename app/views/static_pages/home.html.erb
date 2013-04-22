@@ -1,4 +1,7 @@
 <% provide(:title, 'TAMU Bulletin') %>
+<% if flash[:success] %>
+    <p ><%= flash[:success] %></p>
+<% end %>
 <div class="row-fluid">
   <title><%= yield(:title) %></title>
   <h1>Welcome to TAMU Bulletin</h1>
