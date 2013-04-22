@@ -84,6 +84,7 @@ private
   def signed_in_organization
     @organization = current_account
     unless @organization.is_a? Organization
+      session[:return_to] = request.url
       redirect_to new_session_url, notice: "Please sign in"
     end
   end

@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
         render 'new'
       else
         sign_in account
-        redirect_to account
+        redirect_to session[:return_to] || account
+        session[:return_to] = nil
       end
     else
       render 'new'
@@ -23,7 +24,8 @@ class SessionsController < ApplicationController
     account_login = Loginprovider.find_by_provider_and_loginid(auth_hash['provider'], auth_hash['uid'])
     if account_login
       sign_in account_login.user
-      redirect_to account_login.user
+      redirect_to session[:return_to] || account_login.user
+      session[:return_to] = nil
     else
       email_external = auth_hash['info']['email']
       if !email_external
@@ -34,7 +36,8 @@ class SessionsController < ApplicationController
         if account.valid?
           account.loginprovider = Loginprovider.create(:provider => auth_hash['provider'], :loginid => auth_hash['uid'])
           sign_in account
-          redirect_to account
+          redirect_to session[:return_to] || account
+          session[:return_to] = nil
         else
           render :text => 'failed'
         end

@@ -73,6 +73,7 @@ private
 
   def signed_in_organization
     unless admin? || current_account.is_a?(Organization)
+      session[:return_to] = request.url
       redirect_to new_session_url, notice: "Please sign in"
     end
   end
@@ -88,6 +89,7 @@ private
     @user = current_account
     @organization = Organization.find_by_id(params[:id])
     unless current_account.is_a?(User)
+      session[:return_to] = request.url
       redirect_to new_session_url, notice: "Please sign in"
     end
   end
