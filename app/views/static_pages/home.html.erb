@@ -3,18 +3,16 @@
   <title><%= yield(:title) %></title>
   <h1>Welcome to TAMU Bulletin</h1>
 
-  <h2>
-    This is the temporary home page for the TAMU Bulletin Board.
-  </h2>
-
-  <div class="span12 pagination-centered">
-  	<%= link_to "New User", signup_path, class: "btn btn-large btn-primary" %>
-    <%= link_to "New Organization", '/organizations/new', class: "btn btn-large btn-primary" %>
-    <%= link_to "New Poster", '/posters/new', class: "btn btn-large btn-primary" %>
+  <div class="row-fluid" style="width:99%">
+    <div class="span4 offset2">
+      <h4>New user looking to find events?</h4>
+     <%= link_to "Register Here", signup_path, class: "btn btn-large btn-primary" %>
+   </div>
+   <div class="span5">
+      <h4>Organization looking to advertise?</h4>
+      <%= link_to "Register Here", '/organizations/new', class: "btn btn-large btn-primary" %>
+   </div>
   </div>
-  <h2 class="to-do">
-    #Maybe put a sample poster carousel here or picture of mobile view (like Pinterest): e.g.
-  </h2>
+
   <img src="http://biomed.tamu.edu/community/studentorg/img/student-org-header.jpg">
-  <img src="http://passets-ec.pinterest.com/images/signup_splash/loggedout_mac.png">
 </div>
