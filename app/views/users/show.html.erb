@@ -1,3 +1,17 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.poster-item').popover();
+    $('#recent-posters').isotope({
+      itemSelector: '.poster-item',
+      layoutMode: 'masonry'
+    });
+    setTimeout(function() {
+      $('#recent-posters').isotope('reLayout');
+    }, 300);
+    $(window).smartresize();
+  });
+</script>
+
 <div id="user-container" class="container-fluid">
   <div class="row-fluid">
     <span class="user-picture">
@@ -15,6 +29,14 @@
       <% @user.subscriptions.each do |subscription| %>
         <%= link_to subscription.organization.name, subscription.organization %>
       <% end %>
+    <% end %>
+  </div>
+
+  <div id="recent-posters" class="row-fluid">
+    <% recent_posters(@user).each do |poster| %>
+      <div class="poster-item" data-trigger="hover" data-title="<b><%= poster.title %></b>" data-content="<% if not poster.event_start_date.nil? and not poster.event_end_date.nil? %><b>Start: </b><%= poster.event_start_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><b>End: </b><%= poster.event_end_date.strftime('%I:%M %p %A, %B, %-d, %Y') %><br /><% end %><b>Location: </b><%= poster.location%><br /><b>Organization: </b><%= poster.organization.name%><br /><b>Tag: </b><%= poster.tag%><br /><%= poster.description%>">
+        <a href=<%= poster_url(poster) %> ><%= image_tag poster.file , alt: poster.title , size: "200x300" %></a>
+      </div>
     <% end %>
   </div>
 </div>
