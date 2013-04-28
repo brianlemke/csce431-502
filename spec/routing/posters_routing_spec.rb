@@ -4,7 +4,7 @@ describe PostersController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/posters").should route_to("posters#index")
+      get("/posters").should route_to("posters#mainlist")
     end
 
     it "routes to #new" do

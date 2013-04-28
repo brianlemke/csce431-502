@@ -1,13 +1,24 @@
-<% provide(:title, 'Contact') %>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= yield(:title) %></title>
-  </head>
-  <body>
-    <h1>Contact</h1>
-    <p>
-    	This can be a page for support contact information for the site.
-    </p>
-  </body>
-</html>
+<% provide(:title, 'Contact Us') %>
+<div class="row-fluid">
+  <title><%= yield(:title) %></title>
+  <h1>Contact Us</h1>
+  <div class="span3 offset1">
+  	<address>
+  		<strong>TAMU Bulletin</strong><br>
+  		123 Main St<br>
+  		College Station, TX 77842
+  	</address>
+  </div>
+  <div class="span3">
+  	<address>
+  		<strong>By Phone:</strong><br>
+  		(555) 555-1234
+  	</address>
+  </div>
+  <div class="span3">
+  	<address>
+  		<strong>By Email:</strong><br>
+  		teamh@example.com
+  	</address>
+  </div>
+</div>

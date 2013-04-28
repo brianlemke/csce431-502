@@ -14,6 +14,7 @@ describe "Posters" do
 
       it { should_not have_field("Title") }
       it { should_not have_button("Create Poster") }
+      it { should have_button("Sign in") }
     end
 
     describe "edit poster page" do
@@ -53,10 +54,7 @@ describe "Posters" do
 
     before do
       user = FactoryGirl.create(:admin)
-      visit new_session_path
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-      click_button "Sign in"
+      sign_in user
     end
 
     describe "new poster page" do
@@ -74,12 +72,9 @@ describe "Posters" do
     end
   end
 
-  describe "after logging in" do
+  describe "after logging in as organization" do
     before do
-      visit new_session_path
-      fill_in "Email", with: organization.email
-      fill_in "Password", with: organization.password
-      click_button "Sign in"
+      sign_in organization
     end
 
     describe "new poster page" do
@@ -95,6 +90,18 @@ describe "Posters" do
       it { should have_content(poster.file) }
       it { should have_field('Title') }
       it { should have_button('Update Poster') }
+
+      describe "after editing poster" do
+        let(:new_title) { "This is a brand new title!" }
+
+        before do
+          fill_in "Title", with: new_title
+          click_button "Update Poster"
+        end
+
+        it { should have_content(new_title) }
+        it { should_not have_button("Update Poster") }
+      end
     end
   end
 end

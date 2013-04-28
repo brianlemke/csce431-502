@@ -2,10 +2,7 @@
     <div class="span6">
       <h3>Accounts</h3>
       <p>
-      	If you don't have an account, <%= link_to "create an account", signup_path %> for free.
-      </p>
-      <p class="to-do">
-      	# We can put pictures/icons/graphics about A&M or something here: e.g.
+      	If you don't have an account, <%= link_to "create an account", signup_path, class: "btn btn-info" %> for free.
       </p>
       <img src="http://giving.tamu.edu/images/publications/SpiritMag/wallpapers/University/Academic_Large_1600x1200.jpg">
     </div>
@@ -23,6 +20,7 @@
 			  <%= f.submit "Sign in" %>
 			<% end %>
       <a href="/auth/facebook/" class="btn">Login With Facebook</a>
+      <a href="/auth/twitter/" class="btn">Login With Twitter</a>
 		</div>
 	</div>
 </div>

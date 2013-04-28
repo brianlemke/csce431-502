@@ -25,6 +25,24 @@ describe "OrganizationPages" do
       end
     end
 
+    describe "with duplicate email" do
+      let(:sample_org) { FactoryGirl.create(:organization) }
+
+      before do
+        fill_in "Email", with: sample_org.email
+        fill_in "Name", with: sample_org.name
+        fill_in "Description", with: sample_org.description
+        fill_in "Password", with: sample_org.password
+        fill_in "Confirmation", with: sample_org.password_confirmation
+      end
+
+      it "should not create an organization" do
+        expect { click_button submit}.not_to change(Organization, :count)
+      end
+
+      it { should have_button submit }
+    end
+
     describe "with valid information" do
       let(:sample_org) { FactoryGirl.build(:organization) }
 
@@ -133,6 +151,54 @@ describe "OrganizationPages" do
           specify { organization.reload.name.should == new_name }
         end
       end
+    end
+  end
+
+  describe "show" do
+    let(:organization) { FactoryGirl.create(:organization) }
+
+    describe "without logging in" do
+      before { visit organization_path(organization) }
+
+      it { should have_content(organization.name) }
+      it { should_not have_button("Subscribe") }
+    end
+
+    describe "as user" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      before do
+        sign_in user
+        visit organization_path(organization)
+      end
+
+      it { should have_content(organization.name) }
+      it { should have_button("Subscribe") }
+
+      describe "after subscribing" do
+        before { click_button "Subscribe" }
+
+        it { should have_button("Unsubscribe") }
+        specify { user.subscriptions.first.organization.should == organization }
+
+        describe "after unsubscribing" do
+          before { click_button "Unsubscribe" }
+
+          it { should have_button("Subscribe") }
+          specify { user.subscriptions.empty?.should == true }
+        end
+      end
+    end
+
+    describe "as organization" do
+
+      before do
+        sign_in organization
+        visit organization_path(organization)
+      end
+
+      it { should have_content(organization.name) }
+      it { should_not have_button("Subscribe") }
     end
   end
 end
