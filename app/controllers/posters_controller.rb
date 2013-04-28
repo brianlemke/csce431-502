@@ -88,11 +88,8 @@ private
   def signed_in_organization
     @organization = current_account
     unless @organization.is_a? Organization
-<<<<<<< HEAD
       flash[:error] = "You are not an organization"
-=======
       session[:return_to] = request.url
->>>>>>> Daniel
       redirect_to new_session_url, notice: "Please sign in"
     end
   end
