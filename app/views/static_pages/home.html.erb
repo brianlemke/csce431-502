@@ -2,23 +2,19 @@
 <div class="row-fluid">
   <title><%= yield(:title) %></title>
   <h1>Welcome to TAMU Bulletin</h1>
-<<<<<<< HEAD
-  
-=======
 
-<<<<<<< HEAD
->>>>>>> develop
-=======
->>>>>>> develop
   <div class="row-fluid" style="width:99%">
-    <div class="span4 offset2">
-      <h4>New user looking to find events?</h4>
-     <%= link_to "Register Here", signup_path, class: "btn btn-large btn-primary" %>
-   </div>
-   <div class="span5">
-      <h4>Organization looking to advertise?</h4>
-      <%= link_to "Register Here", '/organizations/new', class: "btn btn-large btn-primary" %>
-   </div>
+    <% if signed_in? %>
+    <% else %>
+      <div class="span4 offset2">
+        <h4>New user looking to find events?</h4>
+       <%= link_to "Register Here", signup_path, class: "btn btn-large btn-primary" %>
+     </div>
+     <div class="span5">
+        <h4>Organization looking to advertise?</h4>
+        <%= link_to "Register Here", '/organizations/new', class: "btn btn-large btn-primary" %>
+     </div>
+    <% end %>
   </div>
 
   <img src="http://biomed.tamu.edu/community/studentorg/img/student-org-header.jpg">
