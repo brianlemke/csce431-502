@@ -47,6 +47,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def externalFailed
+    flash[:error] = "Failure to login with external provider"
+    render 'new'
+  end
+
   def destroy
     sign_out
     redirect_to home_path
