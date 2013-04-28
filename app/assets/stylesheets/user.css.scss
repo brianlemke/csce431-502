@@ -2,3 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#user-container
+{
+  #user-name, #user-email
+  {
+    margin-top: 0px;
+    margin-left: 20px;
+  }
+
+  #user-name
+  {
+    font-size: 20pt;
+  }
+
+  #user-email
+  {
+    font-size: 14pt;
+  }
+
+  #subscription-list
+  {
+    margin-top: 20px;
+
+    h2
+    {
+      text-align: left;
+    }
+
+    a
+    {
+      font-size: 14pt;
+    }
+  }
+}
