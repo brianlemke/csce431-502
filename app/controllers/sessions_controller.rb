@@ -37,9 +37,11 @@ class SessionsController < ApplicationController
           sign_in account
           redirect_to account
         else
-          render :text => 'failed'
+          flash[:error] = "External account failed to validate"
+          render 'new'
         end
       else
+        flash[:error] = "External account failed to create"
         render 'new'
       end
     end
