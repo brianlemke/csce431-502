@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406171358) do
+ActiveRecord::Schema.define(:version => 20130428232850) do
 
   create_table "comments", :force => true do |t|
     t.string   "name"
@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(:version => 20130406171358) do
   create_table "posters", :force => true do |t|
     t.string   "file"
     t.string   "title"
-    t.string   "description"
-    t.string   "tag"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "organization_id"
     t.string   "location"
+    t.string   "description"
+    t.string   "tag"
     t.datetime "event_start_date"
     t.datetime "event_end_date"
   end
