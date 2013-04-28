@@ -94,7 +94,7 @@
                                     <option id='Campus Service'>Campus Service</option>
                                     <option id='Community/Volunteer Service'>Community/Volunteer Service</option>
                                     <option id='Cultural/International'>Cultural/International</option>
-                                    <option id='Enthusiasts'>Global Service</option>
+                                    <option id='Enthusiasts'>Enthusiasts</option>
                                     <option id='Global Service'>Global Service</option>
                                     <option id='Greek Life'>Greek Life</option>
                                     <option id='Healthy Living'>Healthy Living</option>
@@ -126,7 +126,11 @@
         <% @posters.each do |poster| %>
             <div class="row-fluid">
               <div class="span4"><a href="<%= poster.id %>"><%= image_tag poster.file , :alt => poster.title, :size => "200x300" %></a></div>
+<<<<<<< HEAD
               <div class="span8"><b><a href="<%= poster.id %>"><%= poster.title%></a></b><br /><% if not poster.event_start_date.nil? and not poster.event_end_date.nil? %><b>Start: </b><%= poster.event_start_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><b>End: </b><%= poster.event_end_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><% end %><b>Location: </b><a href="http://maps.google.com/?q=<%= poster.location%>"><%= poster.location%></a><br /><b>Organization: </b><a href="../organizations/<%= poster.organization_id %>"><%= poster.organization.name%></a><br /><b>Tag: </b><a href="mainlist?tagSearch=<%= poster.tag %>"><%= poster.tag%></a><br /><%= poster.description%></div>
+=======
+              <div class="span8"><b><a href="<%= poster.id %>"><%= poster.title%></a></b><br /><b>Start: </b><%= poster.event_start_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><b>End: </b><%= poster.event_end_date.strftime("%I:%M %p %A, %B, %-d, %Y") %><br /><b>Location: </b><a href="http://maps.google.com/?q=<%= poster.location%>"><%= poster.location%></a><br /><b>Organization: </b><a href="../organizations/<%= poster.organization_id %>"><%= poster.organization.name%></a><br /><b>Tag: </b><a href="/posters?tagSearch=<%= poster.tag %>"><%= poster.tag%></a><br /><%= poster.description%></div>
+>>>>>>> Daniel
             </div>
         <% end %>
       </div>

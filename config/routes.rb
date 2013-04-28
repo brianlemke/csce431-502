@@ -39,6 +39,7 @@ TamuBulletin::Application.routes.draw do
   root to: 'posters#index'
 
   match '/auth/:provider/callback', to: 'sessions#createExternal'
+  match '/auth/failure', to: 'sessions#externalFailed'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
