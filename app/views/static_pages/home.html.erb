@@ -2,13 +2,13 @@
 <% if flash[:success] %>
     <p ><%= flash[:success] %></p>
 <% end %>
-<div class="row-fluid">
+<div style="text-align:center" class="row-fluid">
   <title><%= yield(:title) %></title>
   <h1>Welcome to TAMU Bulletin</h1>
-
+  <% if signed_in? %>
+  <% else %>
   <div class="row-fluid" style="width:99%">
-    <% if signed_in? %>
-    <% else %>
+
       <div class="span4 offset2">
         <h4>New user looking to find events?</h4>
        <%= link_to "Register Here", signup_path, class: "btn btn-large btn-primary" %>
@@ -17,8 +17,7 @@
         <h4>Organization looking to advertise?</h4>
         <%= link_to "Register Here", '/organizations/new', class: "btn btn-large btn-primary" %>
      </div>
-    <% end %>
   </div>
-
-  <img src="http://biomed.tamu.edu/community/studentorg/img/student-org-header.jpg">
+  <% end %>
+  <img style="align: center" src="http://biomed.tamu.edu/community/studentorg/img/student-org-header.jpg">
 </div>

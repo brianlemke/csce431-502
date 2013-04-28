@@ -23,41 +23,54 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :file %><br />
-    <%= f.file_field :file %>
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title , :class => "span12"%>
+      </div>
+      <br />
+      <div class="field">
+        <%= f.label :file %>
+        <%= f.file_field :file %>
+      </div>
+      <br />
+      <div class="field">
+        <%= f.label :tag %>
+        <%= f.select :tag, ['', 'Agriculture', 'Business', 'Bush School', 'College of Science', 'Education', 'Engineering',
+                            'Geoscience', 'Graduate College', 'Health Science Center', 'Liberal Arts', 'Arts and Culture',
+                            'Campus Service', 'Community/Volunteer Service', 'Cultural/International', 'Enthusiasts',
+                            'Global Service', 'Greek Life', 'Healthy Living', 'Honor', 'Military', 'Professional/Career',
+                            'Recreation', 'Religious', 'Residence Halls', 'Social and Political Issues', 'Special Interests',
+                            'Spirit and Tradition', 'Sports Clubs', 'Student Government'] , :width => "100%"%>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="field">
+        <%= f.label :location %>
+        <%= f.text_area :location , :rows => "2", :class => "span12"%>
+      </div>
+      <br />
+      <div class="field">
+        <%= f.label :event_start_date %>
+        <%= f.text_field :event_start_date, :id=>'timeAndDatePicker', :class => "span12" %>
+      </div>
+      <br />
+      <div class="field">
+        <%= f.label :event_end_date %>
+        <%= f.text_field :event_end_date, :id=>'timeAndDatePicker2', :class => "span12" %>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, :cols => "100", :rows => "10", :class => "span12" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_area :location %>
-  </div>
-  <div class="field">
-    <%= f.label :tag %><br />
-    <%= f.select :tag, ['', 'Agriculture', 'Business', 'Bush School', 'College of Science', 'Education', 'Engineering',
-                        'Geoscience', 'Graduate College', 'Health Science Center', 'Liberal Arts', 'Arts and Culture',
-                        'Campus Service', 'Community/Volunteer Service', 'Cultural/International', 'Enthusiasts',
-                        'Global Service', 'Greek Life', 'Healthy Living', 'Honor', 'Military', 'Professional/Career',
-                        'Recreation', 'Religious', 'Residence Halls', 'Social and Political Issues', 'Special Interests',
-                        'Spirit and Tradition', 'Sports Clubs', 'Student Government'] %>
-  </div>
-  <div class="field">
-    <%= f.label :event_start_date %><br />
-    <%= f.text_field :event_start_date, :id=>'timeAndDatePicker' %>
-  </div>
-  <div class="field">
-    <%= f.label :event_end_date %><br />
-    <%= f.text_field :event_end_date, :id=>'timeAndDatePicker2' %>
-  </div>
+    <br />
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
