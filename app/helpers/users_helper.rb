@@ -10,9 +10,13 @@ module UsersHelper
       posters.concat subscription.organization.posters
     end
     posters.sort do |a, b|
-      return -1 if a.updated_at > b.updated_at
-      return 0 if a.updated_at == b.updated_at
-      return 1
+      if a.updated_at > b.updated_at
+        -1
+      elsif a.updated_at == b.updated_at
+        0
+      else
+        1
+      end
     end
     posters[0, 20]
   end
