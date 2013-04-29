@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     account ||= Organization.find_by_email(params[:session][:email].downcase)
     if account && account.authenticate(params[:session][:password])
       if account.respond_to?(:verified) && !account.verified
-        flash[:error] = "Account not verified"
+        flash[:error] = "Incorrect password"
         render 'new'
       else
         sign_in account
@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
         session[:return_to] = nil
       end
     else
+      flash[:error] = "Account not found"
       render 'new'
     end
   end
