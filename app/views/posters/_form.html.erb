@@ -2,11 +2,27 @@
   $(document).ready(function() {
       $('#timeAndDatePicker').datetimepicker({
           timeFormat: "hh:mm tt",
-          dateFormat: "yy-mm-dd"
+          dateFormat: "yy-mm-dd",
+          showOptions: { direction: "down"},
+          beforeShow: function (input, inst) {
+              var offset = $(input).offset();
+              var height = $(input).height();
+              window.setTimeout(function () {
+                  inst.dpDiv.css({ top: (offset.top + height + 4) + 'px', left: offset.left + 'px' })
+              }, 1);
+          }
       });
       $('#timeAndDatePicker2').datetimepicker({
           timeFormat: "hh:mm tt",
-          dateFormat: "yy-mm-dd"
+          dateFormat: "yy-mm-dd",
+          showOptions: { direction: "down"},
+          beforeShow: function (input, inst) {
+              var offset = $(input).offset();
+              var height = $(input).height();
+              window.setTimeout(function () {
+                  inst.dpDiv.css({ top: (offset.top + height + 4) + 'px', left: offset.left + 'px' })
+              }, 1);
+          }
       });
   })
 </script>
@@ -53,12 +69,12 @@
       <br />
       <div class="field">
         <%= f.label :event_start_date %>
-        <%= f.text_field :event_start_date, :id=>'timeAndDatePicker', :class => "span12" %>
+        <%= f.text_field :event_start_date, :id=>'timeAndDatePicker', :class => "span12", :style => "z-index: 1000;" %>
       </div>
       <br />
       <div class="field">
         <%= f.label :event_end_date %>
-        <%= f.text_field :event_end_date, :id=>'timeAndDatePicker2', :class => "span12" %>
+        <%= f.text_field :event_end_date, :id=>'timeAndDatePicker2', :class => "span12", :style => "z-index: 1000;" %>
       </div>
     </div>
     <div class="span4">

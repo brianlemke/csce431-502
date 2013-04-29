@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20130428232850) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.string   "login_token"
-    t.boolean  "verified",        :default => false
+    t.boolean  "verified",        :default => true
   end
 
   add_index "organizations", ["email"], :name => "index_organizations_on_email", :unique => true
