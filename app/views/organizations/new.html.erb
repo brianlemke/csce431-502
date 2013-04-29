@@ -1,4 +1,7 @@
 <div class="container-fluid fill">
+  <% if flash[:error] %>
+    <div class="offset6 span5 new-organization-error"><%= flash[:error] %></div>
+  <% end %>
   <div class="span6">
     <h3>Create a new TAMU Bulletin Organization</h3>
 
