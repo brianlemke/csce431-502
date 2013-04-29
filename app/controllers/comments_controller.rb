@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  before_filter :signed_in_user, only: [:create]
+  before_filter :correct_user, only: [:destroy]
+
   # POST /comments
   # POST /comments.json
   def create
@@ -21,4 +24,20 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+
+  def signed_in_user
+    unless current_account.is_a? User
+      session[:return_to] = request.url
+      redirect_to new_session_url, notice: "Please sign in"
+    end
+  end
+
+  def correct_user
+    unless current_account == User.find_by_id(params[:id])
+      redirect_to root_path
+    end
+  end
+
 end

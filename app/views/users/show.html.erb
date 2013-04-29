@@ -5,6 +5,13 @@
   <% end %>
 
 <script type="text/javascript">
+  function relayout() {
+    $('#recent-posters').isotope('reLayout');
+    setTimeout(function() {
+      relayout();
+    }, 300);
+  }
+
   $(document).ready(function() {
     $('.poster-item').popover();
     $('#recent-posters').isotope({
@@ -12,7 +19,7 @@
       layoutMode: 'masonry'
     });
     setTimeout(function() {
-      $('#recent-posters').isotope('reLayout');
+      relayout();
     }, 300);
     $(window).smartresize();
   });

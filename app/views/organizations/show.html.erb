@@ -1,9 +1,11 @@
 <script type="text/javascript">
     function relayout() {
-        var timer = setTimeout(function(){
-            $('#grid').isotope('reLayout');
-        },500);
+      $('#grid').isotope('reLayout');
+      setTimeout(function() {
+        relayout();
+      }, 300);
     }
+
     $(document).ready(function() {
         $('#grid').isotope({
             // options
@@ -13,7 +15,7 @@
         $(window).smartresize();
         $('.item').popover();
         setTimeout(function(){
-            $('#grid').isotope('reLayout');
+          relayout();
         }, 300);
     });
 </script>
