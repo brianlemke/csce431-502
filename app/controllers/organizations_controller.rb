@@ -39,6 +39,7 @@ class OrganizationsController < ApplicationController
       sign_in @organization
       redirect_to @organization
     else
+      flash[:error] = @organization.errors.full_messages.first
       render 'edit'
     end
   end

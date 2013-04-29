@@ -1,4 +1,7 @@
 <div class="container-fluid fill">
+  <% if flash[:error] %>
+    <div class="offset6 span5 update-error"><%= flash[:error] %></div>
+  <% end %>
     <div class="span6">
       <h3>Edit Your TAMU Bulletin Account</h3>
       <img src="http://giving.tamu.edu/images/publications/SpiritMag/wallpapers/University/Academic_Large_1600x1200.jpg">
