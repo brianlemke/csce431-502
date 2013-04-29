@@ -71,47 +71,56 @@
 
 <div class="ui-widget">
     <%= form_tag('/posters/mainlist', :method => 'get') do %>
-        <%= label_tag(:q, 'Filter titles for:') %>
-        <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles" %>
+      <div class="row-fluid">
+        <div class="span4">
+            <%= label_tag(:q, 'Filter titles for:') %>
+            <%= text_field_tag :titleSearch, params[:titleSearch], :id => "titles", :class => "span12" %>
 
-        <%= label_tag(:q, 'Filter organizations for:') %>
-        <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations" %>
-        <%= label_tag(:q, 'Filter for date (YYYY-MM-DD):') %>
-        <%= text_field_tag :dateSearch, params[:dateSearch], :id => "datepicker" %>
-        <%= label_tag(:q, 'Filter for tags:') %>
-        <%= select_tag :tagSearch, "<option></option>
-                                    <option id='Agriculture'>Agriculture</option>
-                                    <option id='Business'>Business</option>
-                                    <option id='Bush School'>Bush School</option>
-                                    <option id='College of Science'>College of Science</option>
-                                    <option id='Education'>Education</option>
-                                    <option id='Engineering'>Engineering</option>
-                                    <option id='Geoscience'>Geoscience</option>
-                                    <option id='Graduate College'>Graduate College</option>
-                                    <option id='Health Science Center'>Health Science Center</option>
-                                    <option id='Liberal Arts'>Liberal Arts</option>
-                                    <option id='Arts and Culture'>Arts and Culture</option>
-                                    <option id='Campus Service'>Campus Service</option>
-                                    <option id='Community/Volunteer Service'>Community/Volunteer Service</option>
-                                    <option id='Cultural/International'>Cultural/International</option>
-                                    <option id='Enthusiasts'>Enthusiasts</option>
-                                    <option id='Global Service'>Global Service</option>
-                                    <option id='Greek Life'>Greek Life</option>
-                                    <option id='Healthy Living'>Healthy Living</option>
-                                    <option id='Honor'>Honor</option>
-                                    <option id='Military'>Military</option>
-                                    <option id='Professional/Career'>Professional/Career</option>
-                                    <option id='Recreation'>Recreation</option>
-                                    <option id='Religious'>Religious</option>
-                                    <option id='Residence Halls'>Residence Halls</option>
-                                    <option id='Social and Political Issues'>Social and Political Issues</option>
-                                    <option id='Special Interests'>Special Interests</option>
-                                    <option id='Spirit and Tradition'>Spirit and Tradition</option>
-                                    <option id='Sports Clubs'>Sports Clubs</option>
-                                    <option id='Student Government'>Student Government</option>".html_safe %>
+            <%= label_tag(:q, 'Filter organizations for:') %>
+            <%= text_field_tag :orgSearch, params[:orgSearch], :id => "organizations", :class => "span12" %>
+        </div>
+        <div class="span4">
+            <%= label_tag(:q, 'Filter for date (YYYY-MM-DD):') %>
+            <%= text_field_tag :dateSearch, params[:dateSearch], :id => "datepicker", :class => "span12" %>
+            <%= label_tag(:q, 'Filter for tags:') %>
+            <%= select_tag :tagSearch, "<option></option>
+                                        <option id='Agriculture'>Agriculture</option>
+                                        <option id='Business'>Business</option>
+                                        <option id='Bush School'>Bush School</option>
+                                        <option id='College of Science'>College of Science</option>
+                                        <option id='Education'>Education</option>
+                                        <option id='Engineering'>Engineering</option>
+                                        <option id='Geoscience'>Geoscience</option>
+                                        <option id='Graduate College'>Graduate College</option>
+                                        <option id='Health Science Center'>Health Science Center</option>
+                                        <option id='Liberal Arts'>Liberal Arts</option>
+                                        <option id='Arts and Culture'>Arts and Culture</option>
+                                        <option id='Campus Service'>Campus Service</option>
+                                        <option id='Community/Volunteer Service'>Community/Volunteer Service</option>
+                                        <option id='Cultural/International'>Cultural/International</option>
+                                        <option id='Enthusiasts'>Enthusiasts</option>
+                                        <option id='Global Service'>Global Service</option>
+                                        <option id='Greek Life'>Greek Life</option>
+                                        <option id='Healthy Living'>Healthy Living</option>
+                                        <option id='Honor'>Honor</option>
+                                        <option id='Military'>Military</option>
+                                        <option id='Professional/Career'>Professional/Career</option>
+                                        <option id='Recreation'>Recreation</option>
+                                        <option id='Religious'>Religious</option>
+                                        <option id='Residence Halls'>Residence Halls</option>
+                                        <option id='Social and Political Issues'>Social and Political Issues</option>
+                                        <option id='Special Interests'>Special Interests</option>
+                                        <option id='Spirit and Tradition'>Spirit and Tradition</option>
+                                        <option id='Sports Clubs'>Sports Clubs</option>
+                                        <option id='Student Government'>Student Government</option>".html_safe %>
+        </div>
         <%= label_tag(:q, 'Filter descriptions for:') %>
-        <%= text_field_tag :descriptionSearch, params[:descriptionSearch]%>
-        <%= submit_tag('Search') %>
+        <%= text_field_tag :descriptionSearch, params[:descriptionSearch], :class => "span4"%>
+        <div class="row">
+            <%= submit_tag('Search') %>
+        </div>
+      </div>
+
     <% end %>
 </div>
 <div class="container-fluid">
