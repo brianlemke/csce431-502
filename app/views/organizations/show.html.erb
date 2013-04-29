@@ -28,7 +28,7 @@
 </style>
 
 <% if flash[:success] %>
-    <p ><%= flash[:success] %></p>
+    <div class="update-success"><%= flash[:success] %></p>
 <% end %>
 <% if flash[:error] %>
     <p ><%= flash[:error] %></p>
@@ -53,10 +53,12 @@
     <% end %>
   </div>
 </div>
+<div class="subscribe-button">
   <% if is_user? %>
     <% if is_subscribed?(@organization) %>
-      <%= button_to "Unsubscribe", action: "unsubscribe", id: @organization.id %>
+      <%= button_to "Unsubscribe", { action: "unsubscribe", id: @organization.id }, class: "btn btn-primary" %>
     <% else %>
-      <%= button_to "Subscribe", action: 'subscribe', id: @organization.id %>
+      <%= button_to "Subscribe", { action: 'subscribe', id: @organization.id }, class: "btn btn-primary" %>
     <% end %>
   <% end %>
+</div>
