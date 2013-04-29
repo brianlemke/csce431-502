@@ -36,12 +36,12 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
-      <h1 style="text-align:left; padding-left: 20px;"><%= @organization.name %></h1>
+      <h1 style="text-align:left; padding-left: 10px;"><%= @organization.name %></h1>
     </div>
-    <div class="span12">
+    <div class="span12" style="padding-left: 10px; margin-left: 0px;">
       <b><%= @organization.email%></b>
     </div>
-    <div class="span12">
+    <div id="organization-description" class="span12" style="padding-left: 10px;">
       <%= @organization.description%>
     </div>
   </div>
