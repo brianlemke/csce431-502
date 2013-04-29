@@ -29,12 +29,12 @@ describe "Static pages" do
 
     it "should have the h1 'Help'" do
       visit '/static_pages/help'
-      page.should have_selector('h1', :text => 'Help')
+      page.should have_selector('h1', :text => "Don't Panic")
     end
 
     it "should have the title 'Help'" do
       visit '/static_pages/help'
-      page.should have_selector('title', :text => "Help")
+      page.should have_selector('title', :text => "Tamu Bulletin")
     end
   end
 
